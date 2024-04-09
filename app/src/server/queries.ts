@@ -1,14 +1,6 @@
-import { type DailyStats, type GptResponse, type User, type PageViewSource, type Task, type File } from 'wasp/entities';
+import { type DailyStats, type User, type PageViewSource } from 'wasp/entities';
 import { HttpError } from 'wasp/server';
-import {
-  type GetGptResponses,
-  type GetDailyStats,
-  type GetPaginatedUsers,
-  type GetAllTasksByUser,
-  type GetAllFilesByUser,
-  type GetDownloadFileSignedURL,
-} from 'wasp/server/operations';
-import { getDownloadFileSignedURLFromS3 } from './file-upload/s3Utils.js';
+import { type GetDailyStats, type GetPaginatedUsers } from 'wasp/server/operations';
 
 type DailyStatsWithSources = DailyStats & {
   sources: PageViewSource[];
@@ -17,58 +9,6 @@ type DailyStatsWithSources = DailyStats & {
 type DailyStatsValues = {
   dailyStats: DailyStatsWithSources;
   weeklyStats: DailyStatsWithSources[];
-};
-
-export const getGptResponses: GetGptResponses<void, GptResponse[]> = async (args, context) => {
-  if (!context.user) {
-    throw new HttpError(401);
-  }
-  return context.entities.GptResponse.findMany({
-    where: {
-      user: {
-        id: context.user.id,
-      },
-    },
-  });
-};
-
-export const getAllTasksByUser: GetAllTasksByUser<void, Task[]> = async (_args, context) => {
-  if (!context.user) {
-    throw new HttpError(401);
-  }
-  return context.entities.Task.findMany({
-    where: {
-      user: {
-        id: context.user.id,
-      },
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-};
-
-export const getAllFilesByUser: GetAllFilesByUser<void, File[]> = async (_args, context) => {
-  if (!context.user) {
-    throw new HttpError(401);
-  }
-  return context.entities.File.findMany({
-    where: {
-      user: {
-        id: context.user.id,
-      },
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-};
-
-export const getDownloadFileSignedURL: GetDownloadFileSignedURL<{ key: string }, string> = async (
-  { key },
-  _context
-) => {
-  return await getDownloadFileSignedURLFromS3({ key });
 };
 
 export const getDailyStats: GetDailyStats<void, DailyStatsValues> = async (_args, context) => {
