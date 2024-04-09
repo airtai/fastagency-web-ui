@@ -26,14 +26,6 @@ export default function Login() {
         </Link>
         .
       </span>
-      <br />
-      <span className='text-sm font-medium text-gray-900'>
-        Forgot your password?{' '}
-        <Link to='/request-password-reset' className='underline'>
-          reset it
-        </Link>
-        .
-      </span>
     </AuthWrapper>
   );
 }
