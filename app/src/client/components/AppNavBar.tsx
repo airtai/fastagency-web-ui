@@ -10,14 +10,7 @@ import DropdownUser from './DropdownUser';
 import { DOCS_URL, BLOG_URL } from '../../shared/constants';
 import DarkModeSwitcher from '../admin/components/DarkModeSwitcher';
 import { UserMenuItems } from '../components/UserMenuItems';
-
-const navigation = [
-  { name: 'AI Scheduler (Demo App)', href: '/demo-app' },
-  { name: 'File Upload (AWS S3)', href: '/file-upload' },
-  { name: 'Pricing', href: '/pricing' },
-  { name: 'Documentation', href: DOCS_URL },
-  { name: 'Blog', href: BLOG_URL },
-];
+import { navigation } from '../landing-page/contentSections';
 
 const NavLogo = () => <img className='h-8 w-8' src={logo} alt='Your SaaS App' />;
 

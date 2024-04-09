@@ -13,12 +13,3 @@ export type MainTask = {
   name: string;
   priority: 'low' | 'medium' | 'high';
 };
-
-export type GeneratedSchedule = {
-  mainTasks: MainTask[]; // Main tasks provided by user, ordered by priority
-  subtasks: Subtask[]; // Array of subtasks
-};
-
-export type FunctionCallResponse = {
-  schedule: GeneratedSchedule[];
-};
