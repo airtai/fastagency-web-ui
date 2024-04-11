@@ -43,7 +43,7 @@ export default function App({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className='min-h-screen dark:text-white dark:bg-boxdark-2'>
+      <div className='bg-airt-secondary min-h-screen dark:text-white dark:bg-boxdark-2'>
         {isAdminDashboard ? (
           <>{children}</>
         ) : (

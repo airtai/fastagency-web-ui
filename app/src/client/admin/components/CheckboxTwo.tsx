@@ -5,7 +5,10 @@ const CheckboxTwo = () => {
   const [enabled, setEnabled] = useState<boolean>(false);
   return (
     <div>
-      <label htmlFor='checkboxLabelTwo' className='flex cursor-pointer text-sm text-gray-700 select-none items-center'>
+      <label
+        htmlFor='checkboxLabelTwo'
+        className='flex cursor-pointer text-sm text-airt-font-base select-none items-center'
+      >
         hasPaid:
         <div className='relative'>
           <input

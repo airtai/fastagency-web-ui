@@ -12,6 +12,9 @@ module.exports = {
         satoshi: ['Satoshi', 'sans-serif'],
       },
       colors: {
+        'airt-primary': '#003257',
+        'airt-secondary': '#56b7e1',
+        'airt-font-base': '#fff',
         current: 'currentColor',
         transparent: 'transparent',
         // white: '#FFFFFF',

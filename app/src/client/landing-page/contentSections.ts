@@ -3,7 +3,7 @@ import daBoiAvatar from '../static/da-boi.png';
 import avatarPlaceholder from '../static/avatar-placeholder.png';
 
 export const navigation = [
-  { name: 'Features', href: '#features' },
+  { name: 'Home', href: '/' },
   { name: 'Pricing', href: '/pricing' },
 ];
 export const features = [

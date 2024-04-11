@@ -30,11 +30,11 @@ const UsersTable = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark'>
-        <div className='flex-col flex items-start justify-between p-6 gap-3 w-full bg-gray-100/40 dark:bg-gray-700/50'>
+        <div className='flex-col flex items-start justify-between p-6 gap-3 w-full bg-gray-100/40 dark:bg-airt-font-base'>
           <span className='text-sm font-medium'>Filters:</span>
           <div className='flex items-center justify-between gap-3 w-full px-2'>
             <div className='relative flex items-center gap-3 '>
-              <label htmlFor='email-filter' className='block text-sm text-gray-700 dark:text-white'>
+              <label htmlFor='email-filter' className='block text-sm text-airt-font-base dark:text-white'>
                 email:
               </label>
               <input
@@ -46,7 +46,7 @@ const UsersTable = () => {
                 }}
                 className='rounded border border-stroke py-2 px-5 bg-white outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'
               />
-              <label htmlFor='status-filter' className='block text-sm ml-2 text-gray-700 dark:text-white'>
+              <label htmlFor='status-filter' className='block text-sm ml-2 text-airt-font-base dark:text-white'>
                 status:
               </label>
               <div className='flex-grow relative z-20 rounded border border-stroke pr-8 outline-none bg-white transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input'>
@@ -85,7 +85,7 @@ const UsersTable = () => {
                       </span>
                     ))
                   ) : (
-                    <span className='bg-white text-gray-500 py-2 px-5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'>
+                    <span className='bg-white text-airt-font-base py-2 px-5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary'>
                       Select Status Filters
                     </span>
                   )}
@@ -127,7 +127,7 @@ const UsersTable = () => {
                 </span>
               </div>
               <div className='flex items-center gap-2'>
-                <label htmlFor='hasPaid-filter' className='block text-sm ml-2 text-gray-700 dark:text-white'>
+                <label htmlFor='hasPaid-filter' className='block text-sm ml-2 text-airt-font-base dark:text-white'>
                   hasPaid:
                 </label>
                 <select
