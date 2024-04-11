@@ -1,10 +1,27 @@
-import { useAuth } from 'wasp/client/auth';
-import { updateCurrentUser } from 'wasp/client/operations';
-import './Main.css';
-import AppNavBar from './components/AppNavBar';
-import Footer from './components/Footer';
 import { useMemo, useEffect, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import './Main.css';
+
+import { useAuth } from 'wasp/client/auth';
+import { updateCurrentUser } from 'wasp/client/operations';
+
+import AppNavBar from './components/AppNavBar';
+import Footer from './components/Footer';
+import ServerNotRechableComponent from './components/ServerNotRechableComponent';
+import LoadingComponent from './components/LoadingComponent';
+
+const addServerErrorClass = () => {
+  if (!document.body.classList.contains('server-error')) {
+    document.body.classList.add('server-error');
+  }
+};
+
+const removeServerErrorClass = () => {
+  if (document.body.classList.contains('server-error')) {
+    document.body.classList.remove('server-error');
+  }
+};
 
 /**
  * use this component to wrap all child components
@@ -12,7 +29,7 @@ import { useLocation } from 'react-router-dom';
  */
 export default function App({ children }: { children: ReactNode }) {
   const location = useLocation();
-  const { data: user } = useAuth();
+  const { data: user, isError, isLoading } = useAuth();
 
   const shouldDisplayAppNavBar = useMemo(() => {
     return location.pathname !== '/'; //&& location.pathname !== '/login' && location.pathname !== '/signup';
@@ -45,12 +62,15 @@ export default function App({ children }: { children: ReactNode }) {
   return (
     <>
       <div className='bg-gradient-to-b from-airt-hero-gradient-start via-airt-hero-gradient-middle to-airt-secondary min-h-screen dark:text-white dark:bg-boxdark-2'>
+        {isError && (addServerErrorClass(), (<ServerNotRechableComponent />))}
         {isAdminDashboard ? (
           <>{children}</>
         ) : (
           <div className='flex flex-col min-h-screen justify-between'>
             {shouldDisplayAppNavBar && <AppNavBar />}
-            <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 w-full'>{children}</div>
+            <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 w-full'>
+              {isError ? children : isLoading ? <LoadingComponent /> : (removeServerErrorClass(), children)}
+            </div>
             <div>
               <Footer />
               <div className='flex items-center h-20 bg-airt-footer-copyrights'>

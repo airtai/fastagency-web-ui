@@ -7,13 +7,13 @@ import { useHistory } from 'react-router-dom';
 import { cn } from '../../shared/utils';
 
 export const tiers = [
-  {
-    name: 'Hobby',
-    id: TierIds.HOBBY,
-    price: '$9.99',
-    description: 'All you need to get started',
-    features: ['Limited monthly usage', 'Basic support'],
-  },
+  // {
+  //   name: 'Hobby',
+  //   id: TierIds.HOBBY,
+  //   price: '$9.99',
+  //   description: 'All you need to get started',
+  //   features: ['Limited monthly usage', 'Basic support'],
+  // },
   {
     name: 'Pro',
     id: TierIds.PRO,
@@ -22,13 +22,13 @@ export const tiers = [
     features: ['Unlimited monthly usage', 'Priority customer support'],
     bestDeal: true,
   },
-  {
-    name: '10 Credits',
-    id: TierIds.CREDITS,
-    price: '$9.99',
-    description: 'One-time purchase of 10 credits for your account',
-    features: ['Use credits for e.g. OpenAI API calls', 'No expiration date'],
-  },
+  // {
+  //   name: '10 Credits',
+  //   id: TierIds.CREDITS,
+  //   price: '$9.99',
+  //   description: 'One-time purchase of 10 credits for your account',
+  //   features: ['Use credits for e.g. OpenAI API calls', 'No expiration date'],
+  // },
 ];
 
 const PricingPage = () => {
@@ -70,12 +70,12 @@ const PricingPage = () => {
           test credit card number{' '}
           <span className='px-2 py-1 bg-airt-primary rounded-md text-airt-font-base'>4242 4242 4242 4242 4242</span>
         </p>
-        <div className='isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 lg:gap-x-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+        <div className='justify-center isolate mx-auto mt-16 max-w-none gap-y-8 lg:gap-x-8 sm:mt-20 lg:mx-0 lg:max-w-none'>
           {tiers.map((tier) => (
             <div
               key={tier.id}
               className={cn(
-                'relative flex flex-col grow justify-between rounded-3xl ring-airt-font-base dark:ring-gray-100/10 overflow-hidden p-8 xl:p-10',
+                'relative flex flex-col  ring-2 mx-auto grow justify-center max-w-md rounded-3xl ring-gray-200 overflow-hidden p-8 xl:p-10',
                 {
                   'ring-2': tier.bestDeal,
                   'ring-1 lg:mt-8': !tier.bestDeal,
@@ -105,7 +105,13 @@ const PricingPage = () => {
                 <ul role='list' className='mt-8 space-y-3 text-sm leading-6 text-airt-font-base dark:text-white'>
                   {tier.features.map((feature) => (
                     <li key={feature} className='flex gap-x-3'>
-                      <AiFillCheckCircle className='h-6 w-5 flex-none text-airt-primary' aria-hidden='true' />
+                      <AiFillCheckCircle
+                        className={cn('h-6 w-5 flex-none ', {
+                          'text-airt-font-base': tier.bestDeal,
+                          'text-airt-primary': !tier.bestDeal,
+                        })}
+                        aria-hidden='true'
+                      />
                       {feature}
                     </li>
                   ))}
