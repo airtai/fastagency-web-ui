@@ -30,7 +30,7 @@ export default function Footer() {
             </ul>
           </div> */}
           <div>
-            <h3 className='text-sm font-light leading-6 text-airt-font-base dark:text-white'>Company</h3>
+            <h3 className='text-sm font-bold leading-6 text-airt-font-base dark:text-white'>Company</h3>
             <ul role='list' className='mt-6 space-y-4'>
               {footerNavigation.company.map((item) => (
                 <li key={item.name}>

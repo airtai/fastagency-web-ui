@@ -154,7 +154,7 @@ export default function LandingPage() {
                     alt='App screenshot'
                     width={2432}
                     height={1442}
-                    className='rounded-md shadow-2xl ring-1 ring-airt-font-base'
+                    className='rounded-md shadow-2xl '
                   />
                 </div>
               </div>

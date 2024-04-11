@@ -68,7 +68,7 @@ const PricingPage = () => {
         <p className='mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-airt-font-base dark:text-white'>
           Stripe subscriptions and secure webhooks are built-in. Just add your Stripe Product IDs! Try it out below with
           test credit card number{' '}
-          <span className='px-2 py-1 bg-gray-100 rounded-md text-airt-font-base'>4242 4242 4242 4242 4242</span>
+          <span className='px-2 py-1 bg-airt-primary rounded-md text-airt-font-base'>4242 4242 4242 4242 4242</span>
         </p>
         <div className='isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 lg:gap-x-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {tiers.map((tier) => (
@@ -83,13 +83,8 @@ const PricingPage = () => {
               )}
             >
               {tier.bestDeal && (
-                <div className='absolute top-0 right-0 -z-10 w-full h-full transform-gpu blur-3xl' aria-hidden='true'>
-                  <div
-                    className='absolute w-full h-full bg-gradient-to-br from-amber-400 to-purple-300 opacity-30 dark:opacity-50'
-                    style={{
-                      clipPath: 'circle(670% at 50% 50%)',
-                    }}
-                  />
+                <div className='absolute top-0 right-0 -z-10 w-full h-full ' aria-hidden='true'>
+                  <div className='absolute w-full h-full bg-airt-primary' />
                 </div>
               )}
               <div className='mb-8'>
@@ -136,7 +131,8 @@ const PricingPage = () => {
                   aria-describedby={tier.id}
                   className={cn(
                     {
-                      'bg-airt-primary text-white hover:text-white shadow-sm hover:bg-airt-primary': tier.bestDeal,
+                      'bg-airt-secondary text-white hover:text-airt-primary shadow-sm hover:bg-airt-font-base':
+                        tier.bestDeal,
                       'text-airt-font-base  ring-1 ring-inset ring-purple-200 hover:ring-purple-400': !tier.bestDeal,
                     },
                     {

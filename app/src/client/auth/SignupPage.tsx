@@ -8,11 +8,10 @@ export function Signup() {
       <SignupForm />
       <br />
       <span className='text-sm font-medium text-airt-font-base'>
-        I already have an account (
+        I already have an account?{' '}
         <Link to='/login' className='underline'>
           go to login
         </Link>
-        ).
       </span>
       <br />
     </AuthWrapper>

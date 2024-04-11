@@ -24,7 +24,6 @@ export default function Login() {
         <Link to='/signup' className='underline'>
           go to signup
         </Link>
-        .
       </span>
     </AuthWrapper>
   );

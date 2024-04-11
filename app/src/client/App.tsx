@@ -15,7 +15,7 @@ export default function App({ children }: { children: ReactNode }) {
   const { data: user } = useAuth();
 
   const shouldDisplayAppNavBar = useMemo(() => {
-    return location.pathname !== '/' && location.pathname !== '/login' && location.pathname !== '/signup';
+    return location.pathname !== '/'; //&& location.pathname !== '/login' && location.pathname !== '/signup';
   }, [location]);
 
   const isAdminDashboard = useMemo(() => {
@@ -48,16 +48,18 @@ export default function App({ children }: { children: ReactNode }) {
         {isAdminDashboard ? (
           <>{children}</>
         ) : (
-          <>
+          <div className='flex flex-col min-h-screen justify-between'>
             {shouldDisplayAppNavBar && <AppNavBar />}
-            <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>{children}</div>
-            <Footer />
-            <div className='flex items-center h-20 bg-airt-footer-copyrights'>
-              <p className='text-center w-full text-sm text-airt-font-base opacity-50'>
-                © 2024 airt. All rights reserved.
-              </p>
+            <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 w-full'>{children}</div>
+            <div>
+              <Footer />
+              <div className='flex items-center h-20 bg-airt-footer-copyrights'>
+                <p className='text-center w-full text-sm text-airt-font-base opacity-50'>
+                  © 2024 airt. All rights reserved.
+                </p>
+              </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </>
