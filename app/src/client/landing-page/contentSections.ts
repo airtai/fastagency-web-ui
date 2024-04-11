@@ -65,12 +65,12 @@ export const faqs = [
   },
 ];
 export const footerNavigation = {
-  app: [
-    { name: 'Documentation', href: DOCS_URL },
-    { name: 'Blog', href: BLOG_URL },
-  ],
+  // app: [
+  //   { name: 'Documentation', href: DOCS_URL },
+  //   { name: 'Blog', href: BLOG_URL },
+  // ],
   company: [
-    { name: 'About', href: 'https://wasp-lang.dev' },
+    { name: 'About', href: 'https://airt.ai/' },
     { name: 'Privacy', href: '#' },
     { name: 'Terms of Service', href: '#' },
   ],

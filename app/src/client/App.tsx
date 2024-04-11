@@ -2,6 +2,7 @@ import { useAuth } from 'wasp/client/auth';
 import { updateCurrentUser } from 'wasp/client/operations';
 import './Main.css';
 import AppNavBar from './components/AppNavBar';
+import Footer from './components/Footer';
 import { useMemo, useEffect, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -43,13 +44,19 @@ export default function App({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className='bg-airt-secondary min-h-screen dark:text-white dark:bg-boxdark-2'>
+      <div className='bg-gradient-to-b from-airt-hero-gradient-start via-airt-hero-gradient-middle to-airt-secondary min-h-screen dark:text-white dark:bg-boxdark-2'>
         {isAdminDashboard ? (
           <>{children}</>
         ) : (
           <>
             {shouldDisplayAppNavBar && <AppNavBar />}
             <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>{children}</div>
+            <Footer />
+            <div className='flex items-center h-20 bg-airt-footer-copyrights'>
+              <p className='text-center w-full text-sm text-airt-font-base opacity-50'>
+                © 2024 airt. All rights reserved.
+              </p>
+            </div>
           </>
         )}
       </div>

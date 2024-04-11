@@ -3,6 +3,7 @@ import { type User } from 'wasp/entities';
 import { logout } from 'wasp/client/auth';
 import { STRIPE_CUSTOMER_PORTAL_LINK } from '../../shared/constants';
 import { TierIds } from '../../shared/constants';
+import Button from '../components/Button';
 
 export default function AccountPage({ user }: { user: User }) {
   return (
@@ -63,12 +64,7 @@ export default function AccountPage({ user }: { user: User }) {
         </div>
       </div>
       <div className='inline-flex w-full justify-end'>
-        <button
-          onClick={logout}
-          className='rounded-md px-3.5 py-2.5 text-sm  bg-airt-primary text-airt-font-base   hover:bg-opacity-85 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-        >
-          logout
-        </button>
+        <Button onClick={logout} label='logout' />
       </div>
     </div>
   );
