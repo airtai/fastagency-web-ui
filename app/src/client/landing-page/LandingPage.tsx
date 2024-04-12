@@ -19,7 +19,7 @@ export default function LandingPage() {
 
   const { data: user, isLoading: isUserLoading } = useAuth();
 
-  const NavLogo = () => <img className='h-8 w-8' src={logo} alt='Your SaaS App' />;
+  const NavLogo = () => <img className='h-8' src={logo} style={{ width: '1.8rem' }} alt='FastAgency' />;
 
   return (
     <div className='dark:text-white dark:bg-boxdark-2'>
@@ -32,12 +32,7 @@ export default function LandingPage() {
               className='flex items-center -m-1.5 p-1.5 text-airt-font-base duration-300 ease-in-out hover:text-airt-secondary'
             >
               <NavLogo />
-              <span
-                className='ml-2 text-4xl font-rubik text-airt-font-base leading-6 dark:text-white'
-                style={{ marginTop: '3px' }}
-              >
-                FastAgency
-              </span>
+              <span className='ml-2 text-4xl font-rubik text-airt-font-base leading-6 dark:text-white'>FastAgency</span>
             </a>
           </div>
           <div className='flex lg:hidden'>
@@ -105,7 +100,7 @@ export default function LandingPage() {
                       key={item.name}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-airt-font-base hover:bg-gray-50 dark:text-white dark:hover:bg-boxdark-2'
+                      className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-airt-primary hover:bg-gray-50 dark:text-white dark:hover:bg-boxdark-2'
                     >
                       {item.name}
                     </a>
@@ -122,9 +117,9 @@ export default function LandingPage() {
                     <UserMenuItems user={user} />
                   )}
                 </div>
-                <div className='py-6'>
+                {/* <div className='py-6'>
                   <DarkModeSwitcher />
-                </div>
+                </div> */}
               </div>
             </div>
           </Dialog.Panel>
@@ -138,11 +133,11 @@ export default function LandingPage() {
             <div className='mx-auto max-w-8xl px-6 lg:px-8'>
               <div className='lg:mb-18 mx-auto max-w-5xl text-center'>
                 <h1 className='text-4xl font-rubik text-airt-font-base sm:text-6xl dark:text-white'>
-                  FastAgency.ai: Your <span className='italic'>multi-agent</span> AI digital marketing assistant.
+                  FastAgency.ai: A framework for building <span className='italic'>multi-agent </span> AI services.
                 </h1>
                 <p className='mt-6 mx-auto max-w-2xl text-lg leading-8 text-airt-font-base dark:text-white'>
-                  Unleash the full potential of your advertising efforts with personalized, AI-driven strategies that
-                  evolve with your business. 30 days free trial, no credit card required!
+                  Quickly build scalable SaaS solutions using our powerful, multi-agent AI framework that streamlines
+                  complex processes.
                 </p>
                 <div className='mt-10 flex items-center justify-center gap-x-6'>
                   {/* <a

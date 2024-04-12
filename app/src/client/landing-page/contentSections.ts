@@ -9,30 +9,31 @@ export const navigation = [
 ];
 export const features = [
   {
-    name: 'Intelligent Strategy Customization',
-    description: 'FastAgency tailors campaigns to your business goals using AI that understands your audience.',
-    icon: '🤖', //'🤝',
+    name: 'Build with Your Own APIs: Integrate Seamlessly with Custom Agent Design',
+    description:
+      'Integrate your existing systems seamlessly by defining agents with your own REST APIs. FastAgency.ai allows you to craft bespoke agents tailored to your specific business processes, enabling a personalized approach to AI-driven solutions. This flexibility ensures that you can create highly specialized services that address unique challenges effectively.',
+    icon: '⚙️', //'🤝',
     href: '',
   },
   {
-    name: '360° Campaign Management',
+    name: 'Set It and Forget It: Achieve Autonomous Operations with Minimal Oversight',
     description:
-      'Our specialized AI agents manage everything from keyword selection to budget optimization, keeping your campaigns at peak efficiency.',
-    icon: '👍', //'🔐',
+      'Our platform empowers your agents to operate autonomously, handling complex tasks and decision-making without constant human oversight. This feature not only enhances operational efficiency but also allows your team to focus on strategic activities, boosting productivity and innovation across the board.',
+    icon: '🤖', //'🔐',
     href: '',
   },
   {
-    name: 'Data Privacy First',
+    name: 'Launch Faster Than Ever: Accelerate Time-to-Market with Rapid Deployment',
     description:
-      'Your data remains secure. We offer real-time processing and optional chat history storage to ensure maximum privacy and security for your business information.',
-    icon: '🔐',
+      "Accelerate your time-to-market with FastAgency.ai's streamlined deployment process. Our framework is designed for speed, allowing you to move from concept to launch in record time. This rapid deployment capability ensures that you can quickly adapt to market changes and gain a competitive edge.",
+    icon: '⚡',
     href: '',
   },
   {
-    name: 'Seamless Integration',
+    name: 'Start Collecting Revenue in Just a Week with Rapid Monetization',
     description:
-      'FastAgency seamlessly integrates with your current workflows, beginning with Google Ads and quickly extending to more platforms.',
-    icon: '🤝', //'💸',
+      'Dive into the market swiftly with FastAgency.ai. Our platform enables you to go from setup to sales within a week, allowing you to start generating revenue almost immediately. This rapid monetization feature is designed to give businesses a significant head start, accelerating the return on investment and enabling you to capitalize on AI-driven opportunities faster than ever.',
+    icon: '💸',
     href: '',
   },
 ];
