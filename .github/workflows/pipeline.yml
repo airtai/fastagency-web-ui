@@ -81,53 +81,53 @@ jobs:
               run: docker push ghcr.io/$GITHUB_REPOSITORY --all-tags
 
 
-    # deploy_backend:
-    #     runs-on: ubuntu-22.04
-    #     defaults:
-    #         run:
-    #             shell: bash
-    #     if: github.ref_name == 'main' || github.ref_name == 'dev'
-    #     env:
-    #         GITHUB_USERNAME: ${{ github.actor }}
-    #         GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-    #         PORT: ${{ vars.PORT }}
-    #         REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
-    #         GOOGLE_CLIENT_ID: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_ID || secrets.STAGING_GOOGLE_CLIENT_ID }}
-    #         GOOGLE_CLIENT_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_SECRET || secrets.STAGING_GOOGLE_CLIENT_SECRET }}
-    #         ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
+    deploy_backend:
+        runs-on: ubuntu-22.04
+        defaults:
+            run:
+                shell: bash
+        if: github.ref_name == 'main' || github.ref_name == 'dev'
+        env:
+            GITHUB_USERNAME: ${{ github.actor }}
+            GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+            PORT: ${{ vars.PORT }}
+            REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
+            GOOGLE_CLIENT_ID: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_ID || secrets.STAGING_GOOGLE_CLIENT_ID }}
+            GOOGLE_CLIENT_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_SECRET || secrets.STAGING_GOOGLE_CLIENT_SECRET }}
+            ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
 
-    #         WASP_SERVER_URL: ${{ github.ref_name == 'main' && vars.PROD_WASP_SERVER_URL || vars.STAGING_WASP_SERVER_URL }}
-    #         ADS_SERVER_URL: ${{ github.ref_name == 'main' && vars.PROD_ADS_SERVER_URL || vars.STAGING_ADS_SERVER_URL }}
-    #         BACKEND_DOMAIN: ${{ github.ref_name == 'main' && vars.PROD_BACKEND_DOMAIN || vars.STAGING_BACKEND_DOMAIN }}
-    #         WASP_WEB_CLIENT_URL: ${{ github.ref_name == 'main' && vars.PROD_WASP_WEB_CLIENT_URL || vars.STAGING_WASP_WEB_CLIENT_URL }}
-    #         DATABASE_URL: ${{ github.ref_name == 'main' && secrets.PROD_DATABASE_URL || secrets.STAGING_DATABASE_URL }}
-    #         REACT_APP_API_URL: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_API_URL || vars.STAGING_REACT_APP_API_URL }}
-    #         JWT_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_JWT_SECRET || secrets.STAGING_JWT_SECRET }}
-    #         PRO_SUBSCRIPTION_PRICE_ID: ${{ github.ref_name == 'main' && secrets.PROD_PRO_SUBSCRIPTION_PRICE_ID || secrets.STAGING_PRO_SUBSCRIPTION_PRICE_ID }}
-    #         STRIPE_KEY: ${{ github.ref_name == 'main' && secrets.PROD_STRIPE_KEY || secrets.STAGING_STRIPE_KEY }}
-    #         STRIPE_WEBHOOK_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_STRIPE_WEBHOOK_SECRET || secrets.STAGING_STRIPE_WEBHOOK_SECRET }}
-    #         SSH_KEY: ${{ github.ref_name == 'main' && secrets.PROD_SSH_KEY || secrets.STAGING_SSH_KEY }}
-    #     steps:
-    #         - uses: actions/checkout@v3
-    #         # This is to fix GIT not liking owner of the checkout dir - https://github.com/actions/runner/issues/2033#issuecomment-1204205989
-    #         - run: chown -R $(id -u):$(id -g) $PWD
+            WASP_SERVER_URL: ${{ github.ref_name == 'main' && vars.PROD_WASP_SERVER_URL || vars.STAGING_WASP_SERVER_URL }}
+            ADS_SERVER_URL: ${{ github.ref_name == 'main' && vars.PROD_ADS_SERVER_URL || vars.STAGING_ADS_SERVER_URL }}
+            BACKEND_DOMAIN: ${{ github.ref_name == 'main' && vars.PROD_BACKEND_DOMAIN || vars.STAGING_BACKEND_DOMAIN }}
+            WASP_WEB_CLIENT_URL: ${{ github.ref_name == 'main' && vars.PROD_WASP_WEB_CLIENT_URL || vars.STAGING_WASP_WEB_CLIENT_URL }}
+            DATABASE_URL: ${{ github.ref_name == 'main' && secrets.PROD_DATABASE_URL || secrets.STAGING_DATABASE_URL }}
+            REACT_APP_API_URL: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_API_URL || vars.STAGING_REACT_APP_API_URL }}
+            JWT_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_JWT_SECRET || secrets.STAGING_JWT_SECRET }}
+            PRO_SUBSCRIPTION_PRICE_ID: ${{ github.ref_name == 'main' && secrets.PROD_PRO_SUBSCRIPTION_PRICE_ID || secrets.STAGING_PRO_SUBSCRIPTION_PRICE_ID }}
+            STRIPE_KEY: ${{ github.ref_name == 'main' && secrets.PROD_STRIPE_KEY || secrets.STAGING_STRIPE_KEY }}
+            STRIPE_WEBHOOK_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_STRIPE_WEBHOOK_SECRET || secrets.STAGING_STRIPE_WEBHOOK_SECRET }}
+            SSH_KEY: ${{ github.ref_name == 'main' && secrets.PROD_SSH_KEY || secrets.STAGING_SSH_KEY }}
+        steps:
+            - uses: actions/checkout@v3
+            # This is to fix GIT not liking owner of the checkout dir - https://github.com/actions/runner/issues/2033#issuecomment-1204205989
+            - run: chown -R $(id -u):$(id -g) $PWD
 
-    #         - run: if [[ $GITHUB_REF_NAME == "main" ]]; then echo "TAG=latest" >> $GITHUB_ENV ; else echo "TAG=dev" >> $GITHUB_ENV ; fi;
+            - run: if [[ $GITHUB_REF_NAME == "main" ]]; then echo "TAG=latest" >> $GITHUB_ENV ; else echo "TAG=dev" >> $GITHUB_ENV ; fi;
 
-    #         - run: echo "PATH=$PATH:/github/home/.local/bin" >> $GITHUB_ENV
-    #         - run: 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
-    #         - run: eval $(ssh-agent -s)
-    #         - run: mkdir -p ~/.ssh
-    #         - run: chmod 700 ~/.ssh
-    #         - run: ssh-keyscan "$BACKEND_DOMAIN" >> ~/.ssh/known_hosts
-    #         - run: chmod 644 ~/.ssh/known_hosts
-    #         - run: echo "$SSH_KEY" | base64 --decode > key.pem
-    #         - run: chmod 600 key.pem
+            - run: echo "PATH=$PATH:/github/home/.local/bin" >> $GITHUB_ENV
+            - run: 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+            - run: eval $(ssh-agent -s)
+            - run: mkdir -p ~/.ssh
+            - run: chmod 700 ~/.ssh
+            - run: ssh-keyscan "$BACKEND_DOMAIN" >> ~/.ssh/known_hosts
+            - run: chmod 644 ~/.ssh/known_hosts
+            - run: echo "$SSH_KEY" | base64 --decode > key.pem
+            - run: chmod 600 key.pem
 
-    #         - run: ssh -o StrictHostKeyChecking=no -i key.pem azureuser@"$BACKEND_DOMAIN" "docker images"
-    #         - run: bash scripts/deploy_backend.sh
+            - run: ssh -o StrictHostKeyChecking=no -i key.pem azureuser@"$BACKEND_DOMAIN" "docker images"
+            - run: bash scripts/deploy_backend.sh
 
-    #         - run: rm key.pem
+            - run: rm key.pem
 
     deploy_frontend:
         runs-on: ubuntu-22.04
@@ -135,13 +135,10 @@ jobs:
             contents: write
         if: github.ref_name == 'main' || github.ref_name == 'dev'
         env:
-          # STAGING_BACKEND_DOMAIN: ${{ vars.STAGING_BACKEND_DOMAIN }}
-          # STAGING_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-          # REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
-          # REACT_APP_API_URL: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_API_URL || vars.STAGING_REACT_APP_API_URL }}
-          
-          REACT_APP_CUSTOMER_PORTAL_LINK: ""
-          REACT_APP_API_URL: ""
+          STAGING_BACKEND_DOMAIN: ${{ vars.STAGING_BACKEND_DOMAIN }}
+          STAGING_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
+          REACT_APP_API_URL: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_API_URL || vars.STAGING_REACT_APP_API_URL }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
@@ -171,18 +168,18 @@ jobs:
               with:
                 folder: app/.wasp/build/web-app/build
 
-            # - name: Deploy UI to staging
-            #   if: github.ref_name == 'dev'
-            #   run: |
-            #     apt-get update -y && apt-get install openssh-client git -y
-            #     eval $(ssh-agent -s)
-            #     mkdir -p ~/.ssh
-            #     chmod 700 ~/.ssh
-            #     ssh-keyscan "$STAGING_BACKEND_DOMAIN" >> ~/.ssh/known_hosts
-            #     chmod 644 ~/.ssh/known_hosts
-            #     echo "$STAGING_SSH_KEY" | base64 --decode > key.pem
-            #     chmod 600 key.pem
-            #     ssh -o StrictHostKeyChecking=no -i key.pem azureuser@"$STAGING_BACKEND_DOMAIN" "ls -lah /var/www/html/UI"
-            #     scp -i key.pem -r app/.wasp/build/web-app/build azureuser@"$STAGING_BACKEND_DOMAIN":/var/www/html/UI
-            #     ssh -o StrictHostKeyChecking=no -i key.pem azureuser@"$STAGING_BACKEND_DOMAIN" "ls -lah /var/www/html/UI"
-            #     rm key.pem
+            - name: Deploy UI to staging
+              if: github.ref_name == 'dev'
+              run: |
+                apt-get update -y && apt-get install openssh-client git -y
+                eval $(ssh-agent -s)
+                mkdir -p ~/.ssh
+                chmod 700 ~/.ssh
+                ssh-keyscan "$STAGING_BACKEND_DOMAIN" >> ~/.ssh/known_hosts
+                chmod 644 ~/.ssh/known_hosts
+                echo "$STAGING_SSH_KEY" | base64 --decode > key.pem
+                chmod 600 key.pem
+                ssh -o StrictHostKeyChecking=no -i key.pem azureuser@"$STAGING_BACKEND_DOMAIN" "ls -lah /var/www/html/UI"
+                scp -i key.pem -r app/.wasp/build/web-app/build azureuser@"$STAGING_BACKEND_DOMAIN":/var/www/html/UI
+                ssh -o StrictHostKeyChecking=no -i key.pem azureuser@"$STAGING_BACKEND_DOMAIN" "ls -lah /var/www/html/UI"
+                rm key.pem

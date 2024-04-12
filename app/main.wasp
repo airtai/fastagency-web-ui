@@ -31,7 +31,7 @@ app OpenSaaS {
       },
     },
     onAuthFailedRedirectTo: "/login",
-    onAuthSucceededRedirectTo: "/",
+    onAuthSucceededRedirectTo: "/chat",
   },
   db: { 
     system: PostgreSQL,
@@ -67,6 +67,9 @@ entity User {=psl
   createdAt                 DateTime        @default(now())
   lastActiveTimestamp       DateTime        @default(now())
   isAdmin                   Boolean         @default(false)
+  hasAcceptedTos             Boolean         @default(false)
+  hasSubscribedToMarketingEmails  Boolean         @default(false)
+  isSignUpComplete          Boolean         @default(false)
   stripeId                  String? 
   checkoutSessionId         String?
   hasPaid                   Boolean         @default(false)
@@ -146,6 +149,15 @@ route CheckoutRoute { path: "/checkout", to: CheckoutPage }
 page CheckoutPage {
   authRequired: true,
   component: import Checkout from "@src/client/app/CheckoutPage"
+}
+
+route TocPageRoute { path: "/toc", to: TocPage }
+page TocPage {
+  component: import TocPage from "@src/client/app/TocPage",
+}
+route PrivacyRoute { path: "/privacy", to: PrivacyPage }
+page PrivacyPage {
+  component: import PrivacyPage from "@src/client/app/PrivacyPage",
 }
 
 route AdminRoute { path: "/admin", to: DashboardPage }

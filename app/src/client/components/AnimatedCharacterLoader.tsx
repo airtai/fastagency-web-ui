@@ -33,7 +33,7 @@ const AnimatedCharacterLoader: React.FC<AnimatedCharacterLoaderProps> = ({
     >
       <div
         style={{ maxWidth: '800px', margin: 'auto' }}
-        className={`relative ml-3 block w-full p-4 pl-10 text-sm text-captn-light-cream  border-captn-dark-blue rounded-lg ${bgColor} `}
+        className={`relative ml-3 block w-full p-4 pl-10 text-sm text-airt-font-base  border-captn-dark-blue rounded-lg ${bgColor} `}
       >
         {showLogo && (
           <span

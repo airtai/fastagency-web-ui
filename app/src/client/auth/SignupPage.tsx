@@ -1,19 +1,11 @@
-import { SignupForm } from 'wasp/client/auth';
-import { Link } from 'react-router-dom';
 import { AuthWrapper } from './authWrapper';
+import imgUrl from '../static/logo.svg';
+import { State, LoginForm } from './LoginPage';
 
 export function Signup() {
   return (
     <AuthWrapper>
-      <SignupForm />
-      <br />
-      <span className='text-sm font-medium text-airt-font-base'>
-        I already have an account?{' '}
-        <Link to='/login' className='underline'>
-          go to login
-        </Link>
-      </span>
-      <br />
+      <LoginForm logo={imgUrl} state={State.Signup} />
     </AuthWrapper>
   );
 }
