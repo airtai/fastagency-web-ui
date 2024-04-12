@@ -14,11 +14,12 @@ app OpenSaaS {
         "<meta name='twitter:image:height' content='400' />",
         "<meta name='twitter:card' content='summary_large_image' />",
         // you can put your analytics scripts here
-        "<script defer data-domain='<your-site-id>' src='https://plausible.io/js/script.js'></script>",
+        // "<script defer data-domain='<your-site-id>' src='https://plausible.io/js/script.js'></script>",
         // plausible has script extension `script.local.js` for local development
-        "<script defer data-domain='<your-site-id>' src='https://plausible.io/js/script.local.js'></script>",
+        // "<script defer data-domain='<your-site-id>' src='https://plausible.io/js/script.local.js'></script>",
         // google analytics only needs one script and will automatically detect if you are in dev mode 
-        "<!-- Google tag (gtag.js) --><script>...</script>"
+        //"<!-- Google tag (gtag.js) --><script>...</script>"
+        "<script type='text/javascript'> (function(l) { if (l.search[1] === '/' ) { var decoded = l.search.slice(1).split('&').map(function(s) { return s.replace(/~and~/g, '&') }).join('?'); window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash ); } }(window.location)) </script>",
   ],
   // 🔐 Auth out of the box! https://wasp-lang.dev/docs/auth/overview
   auth: {
