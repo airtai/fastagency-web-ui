@@ -3,7 +3,8 @@ import daBoiAvatar from '../static/da-boi.png';
 import avatarPlaceholder from '../static/avatar-placeholder.png';
 
 export const navigation = [
-  { name: 'Features', href: '#features' },
+  { name: 'Home', href: '/' },
+  { name: 'Chat', href: '/chat' },
   { name: 'Pricing', href: '/pricing' },
 ];
 export const features = [
@@ -65,12 +66,12 @@ export const faqs = [
   },
 ];
 export const footerNavigation = {
-  app: [
-    { name: 'Documentation', href: DOCS_URL },
-    { name: 'Blog', href: BLOG_URL },
-  ],
+  // app: [
+  //   { name: 'Documentation', href: DOCS_URL },
+  //   { name: 'Blog', href: BLOG_URL },
+  // ],
   company: [
-    { name: 'About', href: 'https://wasp-lang.dev' },
+    { name: 'About', href: 'https://airt.ai/' },
     { name: 'Privacy', href: '#' },
     { name: 'Terms of Service', href: '#' },
   ],

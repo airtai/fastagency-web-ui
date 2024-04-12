@@ -24,7 +24,7 @@ export const UserMenuItems = ({ user, setMobileMenuOpen }: { user?: Partial<User
           <Link
             to='/account'
             onClick={handleMobileMenuClick}
-            className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-yellow-500'
+            className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-airt-secondary'
           >
             <svg
               className='fill-current'
@@ -54,11 +54,11 @@ export const UserMenuItems = ({ user, setMobileMenuOpen }: { user?: Partial<User
             'px-6': path === '/admin',
           })}
         >
-          <li className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-yellow-500'>
+          <li className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-airt-secondary'>
             <Link
               to='/admin'
               onClick={handleMobileMenuClick}
-              className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-yellow-500'
+              className='flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-airt-secondary'
             >
               <TfiDashboard size='1.1rem' />
               Admin Dashboard
@@ -69,7 +69,7 @@ export const UserMenuItems = ({ user, setMobileMenuOpen }: { user?: Partial<User
       <button
         onClick={() => logout()}
         className={cn(
-          'flex items-center gap-3.5 py-4 text-sm font-medium duration-300 ease-in-out hover:text-yellow-500',
+          'flex items-center gap-3.5 py-4 text-sm font-medium duration-300 ease-in-out hover:text-airt-secondary',
           {
             'sm:px-6': path !== '/admin',
             'px-6': path === '/admin',

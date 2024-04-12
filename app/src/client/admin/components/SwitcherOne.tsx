@@ -20,7 +20,7 @@ const SwitcherOne = ({ user, updateUserById }: { user?: Partial<User>; updateUse
           />
           <div className='reblock h-8 w-14 rounded-full bg-meta-9 dark:bg-[#5A616B]'></div>
           <div
-            className={cn('absolute left-1 top-1 h-6 w-6 rounded-full bg-white dark:bg-gray-400 transition', {
+            className={cn('absolute left-1 top-1 h-6 w-6 rounded-full bg-white dark:bg-airt-font-base transition', {
               '!right-1 !translate-x-full !bg-primary dark:!bg-white': enabled,
             })}
           ></div>

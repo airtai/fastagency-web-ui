@@ -7,15 +7,8 @@ import { fetchStripeCustomer, createStripeCheckoutSession } from './payments/str
 import { TierIds } from '../shared/constants.js';
 
 export const stripePayment: StripePayment<string, StripePaymentResult> = async (tier, context) => {
-  if (!context.user) {
+  if (!context.user || !context.user.email) {
     throw new HttpError(401);
-  }
-  const userEmail = context.user.email;
-  if (!userEmail) {
-    throw new HttpError(
-      403,
-      'User needs an email to make a payment. If using the usernameAndPassword Auth method, switch to an Auth method that provides an email.'
-    );
   }
 
   let priceId;
@@ -23,25 +16,20 @@ export const stripePayment: StripePayment<string, StripePaymentResult> = async (
     priceId = process.env.HOBBY_SUBSCRIPTION_PRICE_ID!;
   } else if (tier === TierIds.PRO) {
     priceId = process.env.PRO_SUBSCRIPTION_PRICE_ID!;
-  } else if (tier === TierIds.CREDITS) {
-    priceId = process.env.CREDITS_PRICE_ID!;
   } else {
-    throw new HttpError(404, 'Invalid tier');
+    throw new HttpError(400, 'Invalid tier');
   }
 
   let customer: Stripe.Customer;
   let session: Stripe.Checkout.Session;
   try {
-    customer = await fetchStripeCustomer(userEmail);
+    customer = await fetchStripeCustomer(context.user.email);
     session = await createStripeCheckoutSession({
       priceId,
       customerId: customer.id,
-      mode: tier === TierIds.CREDITS ? 'payment' : 'subscription',
     });
   } catch (error: any) {
-    const statusCode = error.statusCode || 500;
-    const errorMessage = error.message || 'Internal server error';
-    throw new HttpError(statusCode, errorMessage);
+    throw new HttpError(500, error.message);
   }
 
   await context.entities.User.update({

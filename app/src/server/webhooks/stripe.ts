@@ -36,13 +36,8 @@ export const stripeWebhook: StripeWebhook = async (request, response, context) =
         expand: ['line_items'],
       });
 
-      /**
-       * here are your products, both subscriptions and one-time payments.
-       * make sure to configure them in the Stripe dashboard first!
-       * see: https://docs.opensaas.sh/guides/stripe-integration/
-       */
       if (line_items?.data[0]?.price?.id === process.env.HOBBY_SUBSCRIPTION_PRICE_ID) {
-        console.log('Hobby subscription purchased');
+        console.log('Hobby subscription purchased ');
         await context.entities.User.updateMany({
           where: {
             stripeId: userStripeId,
@@ -54,7 +49,7 @@ export const stripeWebhook: StripeWebhook = async (request, response, context) =
           },
         });
       } else if (line_items?.data[0]?.price?.id === process.env.PRO_SUBSCRIPTION_PRICE_ID) {
-        console.log('Pro subscription purchased');
+        console.log('Pro subscription purchased ');
         await context.entities.User.updateMany({
           where: {
             stripeId: userStripeId,
@@ -65,22 +60,26 @@ export const stripeWebhook: StripeWebhook = async (request, response, context) =
             subscriptionTier: TierIds.PRO,
           },
         });
-      } else if (line_items?.data[0]?.price?.id === process.env.CREDITS_PRICE_ID) {
-        console.log('Credits purchased');
-        await context.entities.User.updateMany({
-          where: {
-            stripeId: userStripeId,
-          },
-          data: {
-            credits: {
-              increment: 10,
-            },
-            datePaid: new Date(),
-          },
-        });
-      } else {
-        response.status(404).send('Invalid product');
       }
+
+      /**
+       * and here is an example of handling a different type of product
+       * make sure to configure it in the Stripe dashboard first!
+       */
+
+      // if (line_items?.data[0]?.price?.id === process.env.CREDITS_PRICE_ID) {
+      //   console.log('Credits purchased: ');
+      //   await context.entities.User.updateMany({
+      //     where: {
+      //       stripeId: userStripeId,
+      //     },
+      //     data: {
+      //       credits: {
+      //         increment: 10,
+      //       },
+      //     },
+      //   });
+      // }
     } else if (event.type === 'invoice.paid') {
       const invoice = event.data.object as Stripe.Invoice;
       const periodStart = new Date(invoice.period_start * 1000);
@@ -107,11 +106,9 @@ export const stripeWebhook: StripeWebhook = async (request, response, context) =
           },
         });
       }
-      /**
-       * you'll want to make a check on the front end to see if the subscription is past due
-       * and then prompt the user to update their payment method
-       * this is useful if the user's card expires or is canceled and automatic subscription renewal fails
-       */
+      // you'll want to make a check on the front end to see if the subscription is past due
+      // and then prompt the user to update their payment method
+      // this is useful if the user's card expires or is canceled and automatic subscription renewal fails
       if (subscription.status === 'past_due') {
         console.log('Subscription past due: ', userStripeId);
         await context.entities.User.updateMany({
@@ -152,17 +149,31 @@ export const stripeWebhook: StripeWebhook = async (request, response, context) =
             },
           });
 
-          if (customer.email) {
-            await emailSender.send({
-              to: customer.email,
-              subject: 'We hate to see you go :(',
-              text: 'We hate to see you go. Here is a sweet offer...',
-              html: 'We hate to see you go. Here is a sweet offer...',
+          // if (customer.email) {
+          //   await emailSender.send({
+          //     to: customer.email,
+          //     subject: 'We hate to see you go :(',
+          //     text: 'We hate to see you go. Here is a sweet offer...',
+          //     html: 'We hate to see you go. Here is a sweet offer...',
+          //   });
+          // }
+        }
+
+        if (!subscription.cancel_at_period_end) {
+          console.log('Subscription resumed at period end');
+          if (customer) {
+            await context.entities.User.update({
+              where: {
+                id: customer.id,
+              },
+              data: {
+                subscriptionStatus: 'active',
+              },
             });
           }
         }
       }
-    } else if (event.type === 'customer.subscription.deleted') {
+    } else if (event.type === 'customer.subscription.deleted' || event.type === 'customer.subscription.canceled') {
       const subscription = event.data.object as Stripe.Subscription;
       userStripeId = subscription.customer as string;
 

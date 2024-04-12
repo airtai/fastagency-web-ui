@@ -24,15 +24,7 @@ export async function fetchStripeCustomer(customerEmail: string) {
   return customer;
 }
 
-export async function createStripeCheckoutSession({
-  priceId,
-  customerId,
-  mode,
-}: {
-  priceId: string;
-  customerId: string;
-  mode: 'subscription' | 'payment';
-}) {
+export async function createStripeCheckoutSession({ priceId, customerId }: { priceId: string; customerId: string }) {
   return await stripe.checkout.sessions.create({
     line_items: [
       {
@@ -40,13 +32,22 @@ export async function createStripeCheckoutSession({
         quantity: 1,
       },
     ],
-    mode: mode,
+    mode: 'subscription',
     success_url: `${DOMAIN}/checkout?success=true`,
     cancel_url: `${DOMAIN}/checkout?canceled=true`,
-    automatic_tax: { enabled: true },
-    customer_update: {
-      address: 'auto',
-    },
+    // automatic_tax: { enabled: true },
+    // customer_update: {
+    //   address: 'auto',
+    // },
     customer: customerId,
+    subscription_data: {
+      trial_settings: {
+        end_behavior: {
+          missing_payment_method: 'create_invoice',
+        },
+      },
+      trial_period_days: 30,
+    },
+    payment_method_collection: 'if_required',
   });
 }

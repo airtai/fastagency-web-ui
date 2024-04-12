@@ -115,6 +115,11 @@ page LandingPage {
   component: import LandingPage from "@src/client/landing-page/LandingPage"
 }
 
+route ChatPageRoute { path: "/chat/:id?", to: ChatPage }
+page ChatPage {
+  component: import createAuthRequiredChatPage from "@src/client/app/ChatPage"
+}
+
 route LoginRoute { path: "/login", to: LoginPage }
 page LoginPage {
   component: import Login from "@src/client/auth/LoginPage"

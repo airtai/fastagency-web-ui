@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import Logo from '../../static/logo.png';
+import Logo from '../../static/logo.svg';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import { cn } from '../../../shared/utils';
 
@@ -55,7 +55,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     <aside
       ref={sidebar}
       className={cn(
-        'absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-gray-800 duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0',
+        'absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-airt-primary duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0',
         {
           'translate-x-0': sidebarOpen,
           '-translate-x-full': !sidebarOpen,
@@ -106,9 +106,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 isActive={(_match, location) => location.pathname === '/admin'}
                 className={(isActive) =>
                   cn(
-                    'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                    'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                     {
-                      'bg-gray-700 dark:bg-meta-4': isActive,
+                      'bg-airt-secondary dark:bg-meta-4': isActive,
                     }
                   )
                 }
@@ -149,9 +149,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   to='/admin/users'
                   className={(isActive) =>
                     cn(
-                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                       {
-                        'bg-gray-700 dark:bg-meta-4': isActive,
+                        'bg-airt-secondary dark:bg-meta-4': isActive,
                       }
                     )
                   }
@@ -187,9 +187,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   to='/admin/settings'
                   className={(isActive) =>
                     cn(
-                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                       {
-                        'bg-gray-700 dark:bg-meta-4': isActive,
+                        'bg-airt-secondary dark:bg-meta-4': isActive,
                       }
                     )
                   }
@@ -236,9 +236,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   to='/admin/chart'
                   className={(isActive) =>
                     cn(
-                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                       {
-                        'bg-gray-700 dark:bg-meta-4': isActive,
+                        'bg-airt-secondary dark:bg-meta-4': isActive,
                       }
                     )
                   }
@@ -282,9 +282,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         isActive={(_match, location) => location.pathname.includes('forms')}
                         className={(isActive) =>
                           cn(
-                            'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                            'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                             {
-                              'bg-gray-700 dark:bg-meta-4': isActive,
+                              'bg-airt-secondary dark:bg-meta-4': isActive,
                             }
                           )
                         }
@@ -385,9 +385,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   to='/admin/calendar'
                   className={(isActive) =>
                     cn(
-                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                      'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                       {
-                        'bg-gray-700 dark:bg-meta-4': isActive,
+                        'bg-airt-secondary dark:bg-meta-4': isActive,
                       }
                     )
                   }
@@ -420,9 +420,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         isActive={(_match, location) => location.pathname.includes('ui')}
                         className={(isActive) =>
                           cn(
-                            'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-gray-700 dark:hover:bg-meta-4',
+                            'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
                             {
-                              'bg-gray-700 dark:bg-meta-4': isActive,
+                              'bg-airt-secondary dark:bg-meta-4': isActive,
                             }
                           )
                         }
