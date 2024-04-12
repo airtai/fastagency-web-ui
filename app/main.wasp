@@ -46,7 +46,7 @@ app OpenSaaS {
     // Note that the "Dummy" provider is just for local development purposes. 
     // Make sure to check the server logs for the confirmation email token (it will not be sent to an address)!
     // Please use SendGrid in production. See: https://docs.opensaas.sh/guides/email-sending/
-    provider: Dummy, 
+    provider: SendGrid, 
     defaultFrom: {
       name: "Open SaaS App",
       // When using SendGrid, you must use the same email address that you configured your account to send out emails with!
