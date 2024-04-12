@@ -10,22 +10,23 @@ export default function PrivacyPage() {
             <p>
               Airt technologies, Inc. ("we", "us", or "our") is committed to protecting the privacy of our users. This
               Privacy Policy explains how we collect, use, and disclose information through our SaaS tool,{' '}
-              <b>Capt’n.ai</b> (the "Service").
+              <b>FastAgency</b> (the "Service").
             </p>
           </section>
 
           <section className='mb-8'>
             <h2 className='text-xl font-semibold mb-2'>Information We Collect</h2>
             <p>
-              At Capt’n.ai, we value your privacy and are committed to ensuring the highest level of confidentiality and
-              security for your information. Here's what you need to know about the information we collect when you use
-              our Service:
+              At FastAgency, we value your privacy and are committed to ensuring the highest level of confidentiality
+              and security for your information. Here's what you need to know about the information we collect when you
+              use our Service:
             </p>
             <br />
             <ul className='list-decimal pl-6'>
               <li>
-                <b>Account Information:</b> When you create a Capt’n.ai account, we collect your name and email address.
-                This information is essential to personalize your experience and enable various features of the Service.
+                <b>Account Information:</b> When you create a FastAgency account, we collect your name and email
+                address. This information is essential to personalize your experience and enable various features of the
+                Service.
               </li>
               <li>
                 <b>Integrations:</b> As you integrate your various marketing platforms with our Service, we collect
@@ -46,7 +47,7 @@ export default function PrivacyPage() {
                 information, and other data related to your activities within our Service.
               </li>
               <li>
-                <b>Data Processing:</b> At Capt’n.ai, your data's privacy is a top priority. We process data on-the-fly
+                <b>Data Processing:</b> At FastAgency, your data's privacy is a top priority. We process data on-the-fly
                 and do not store any data in databases, except for chat history as detailed in the "Third-Party and
                 Proprietary AI Tools" section. This ensures your data stays where it belongs—with you.
               </li>
@@ -59,7 +60,7 @@ export default function PrivacyPage() {
             <ul className='list-disc pl-6'>
               <li>
                 <b>Provide, Maintain, and Improve the Service:</b> We use your information to deliver the services you
-                request, maintain your account, and enhance your experience with Capt’n.ai.
+                request, maintain your account, and enhance your experience with FastAgency.
               </li>
               <li>
                 <b>Respond to Your Requests and Inquiries:</b> Your information helps us respond to your customer
@@ -110,7 +111,7 @@ export default function PrivacyPage() {
                 // href="https://myaccount.google.com/permissions‍"
                 href='https://myaccount.google.com/connections'
                 target='_black'
-                className='no-underline hover:underline text-captn-light-blue'
+                className='no-underline hover:underline text-airt-primary'
               >
                 https://myaccount.google.com/permissions‍
               </a>
@@ -121,11 +122,11 @@ export default function PrivacyPage() {
             <h2 className='text-xl font-semibold mb-2'>Google API Services User Data Policy</h2>
             <h3 className='text-l font-semibold mb-2'>Google API Services Disclosure</h3>
             <p>
-              Capt’n.ai's use and transfer of information received from Google APIs adhere to{' '}
+              FastAgency's use and transfer of information received from Google APIs adhere to{' '}
               <a
                 href='https://developers.google.com/terms/api-services-user-data-policy'
                 target='_blank'
-                className='no-underline hover:underline text-captn-light-blue'
+                className='no-underline hover:underline text-airt-primary'
               >
                 Google API Services User Data Policy
               </a>
@@ -135,7 +136,7 @@ export default function PrivacyPage() {
             <br />
             <h3 className='text-l font-semibold mb-2'>Use of Google API Services Data</h3>
             <p>
-              When you choose to connect various Google services to Capt’n.ai, we require specific permissions to fetch
+              When you choose to connect various Google services to FastAgency, we require specific permissions to fetch
               and display data for your interactive queries. Below are the permissions required for each Google service:
             </p>
             <br />
@@ -145,34 +146,34 @@ export default function PrivacyPage() {
                 <a
                   href='https://developers.google.com/analytics/devguides/config/admin/v1'
                   target='_blank'
-                  className='no-underline hover:underline text-captn-light-blue'
+                  className='no-underline hover:underline text-airt-primary'
                 >
                   https://developers.google.com/analytics/devguides/config/admin/v1
                 </a>{' '}
-                - Enables you to interact with your Google Analytics data through Capt’n.ai.
+                - Enables you to interact with your Google Analytics data through FastAgency.
               </li>
 
-              <li>
+              {/* <li>
                 Google Ad:{' '}
                 <a
                   href='https://developers.google.com/google-ads/api/docs/oauth/internals'
                   target='_blank'
-                  className='no-underline hover:underline text-captn-light-blue'
+                  className='no-underline hover:underline text-airt-primary'
                 >
                   https://developers.google.com/google-ads/api/docs/oauth/internals
                 </a>{' '}
-                - Allows Capt’n.ai to fetch and display your Google Ads data for interactive queries.
-              </li>
+                - Allows FastAgency to fetch and display your Google Ads data for interactive queries.
+              </li> */}
               <li>
                 Google Search Console:{' '}
                 <a
                   href='https://developers.google.com/webmaster-tools/v1/sites/get'
                   target='_blank'
-                  className='no-underline hover:underline text-captn-light-blue'
+                  className='no-underline hover:underline text-airt-primary'
                 >
                   https://developers.google.com/webmaster-tools/v1/sites/get
                 </a>{' '}
-                - Permits Capt’n.ai to access and display your Google Search Console data, making it available for
+                - Permits FastAgency to access and display your Google Search Console data, making it available for
                 interactive chat.
               </li>
             </ul>
@@ -203,14 +204,14 @@ export default function PrivacyPage() {
               rate, and user demographics. By incorporating these insights, the chatbot can tailor its responses to
               align with the user's website-related inquiries.
             </p>
-            <br />
-            <p>
+            {/* <br /> */}
+            {/* <p>
               <b>Google Ads:</b> Data from your Google Ads campaigns offers insights into your advertising efforts, ad
               performance, and user interactions with your advertisements. Key metrics such as ad clicks, impressions,
               click-through rates (CTR), and conversion rates are integrated into the chatbot's learning process. This
               integration enables the chatbot to provide more informed and relevant responses regarding your advertising
               strategies.
-            </p>
+            </p> */}
             <br />
             <p>
               <b>Google Search Console:</b> Information gathered from Google Search Console sheds light on your
@@ -221,7 +222,7 @@ export default function PrivacyPage() {
             <br />
             <p>
               <b>Chat Interactions:</b> This refers to the text-based interactions you have with the chatbot within the
-              Capt’n.ai platform. The content of these conversations, including your questions and responses. This data
+              FastAgency platform. The content of these conversations, including your questions and responses. This data
               aids in refining the AI's ability to comprehend inputs and generate contextually accurate responses.
             </p>
             <br />
@@ -245,7 +246,7 @@ export default function PrivacyPage() {
               <a
                 href='https://learn.microsoft.com/en-us/azure/compliance/'
                 target='_blank'
-                className='no-underline hover:underline text-captn-light-blue'
+                className='no-underline hover:underline text-airt-primary'
               >
                 https://learn.microsoft.com/en-us/azure/compliance/
               </a>
@@ -257,12 +258,12 @@ export default function PrivacyPage() {
           <section className='mb-8'>
             <h3 className='text-l font-semibold mb-2'>User Consent Process</h3>
             <p>
-              During your registration with Capt’n.ai, we require your explicit consent regarding our privacy practices.
-              As part of the sign-up process, you will encounter a checkbox indicating that you have read and agree to
-              our Terms and Conditions and Privacy Policy. By checking this box, you acknowledge your understanding and
-              agreement to how we handle your data as detailed in these documents. Only upon agreeing to these terms
-              will the chatbot service proceed with using your data. You have the option to withdraw your consent at any
-              point, read more below.
+              During your registration with FastAgency, we require your explicit consent regarding our privacy
+              practices. As part of the sign-up process, you will encounter a checkbox indicating that you have read and
+              agree to our Terms and Conditions and Privacy Policy. By checking this box, you acknowledge your
+              understanding and agreement to how we handle your data as detailed in these documents. Only upon agreeing
+              to these terms will the chatbot service proceed with using your data. You have the option to withdraw your
+              consent at any point, read more below.
             </p>
           </section>
 
@@ -270,7 +271,7 @@ export default function PrivacyPage() {
             <h3 className='text-l font-semibold mb-2'>Opt-Out Options</h3>
             <p>
               If you choose to withdraw your consent and opt-out of data sharing with third-party tools, you will no
-              longer be able to use the Capt’n.ai service. The nature of our tool requires data sharing for its basic
+              longer be able to use the FastAgency service. The nature of our tool requires data sharing for its basic
               functionality. Therefore, opting out effectively means discontinuing use of the service.
             </p>
           </section>
@@ -284,14 +285,14 @@ export default function PrivacyPage() {
             </p>
             <br />
             <p>
-              <b>If you do not agree with this policy, please refrain from signing up and using Capt’n.ai.</b>
+              <b>If you do not agree with this policy, please refrain from signing up and using FastAgency.</b>
             </p>
           </section>
 
           <section className='mb-8'>
             <h2 className='text-xl font-semibold mb-2'>Google Analytics</h2>
             <p>
-              Google Analytics is used across captn.ai domain in order to collect information about the users'
+              Google Analytics is used across fastagency.ai domain in order to collect information about the users'
               interactions with the site as well as to identify returning visits, location, device data and engagement
               signals. Collected data helps to understand the relevancy and general usage of the tool hence, to provide
               better experience and solutions towards the needs of the users, fix errors and bugs. No data is shared
@@ -364,8 +365,8 @@ export default function PrivacyPage() {
             <h2 className='text-xl font-semibold mb-2'>Contact Us</h2>
             <p className='mb-4'>
               In order to receive further information regarding use of the Site, please contact us at:{' '}
-              <a href='mailto:support@captn.ai' className='no-underline hover:underline text-captn-light-blue'>
-                support@captn.ai
+              <a href='mailto:support@fastagency.ai' className='no-underline hover:underline text-airt-primary'>
+                support@fastagency.ai
               </a>
               .
             </p>

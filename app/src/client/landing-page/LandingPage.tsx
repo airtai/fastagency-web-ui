@@ -11,7 +11,7 @@ import { features, navigation, faqs, footerNavigation, testimonials } from './co
 import DropdownUser from '../components/DropdownUser';
 import { DOCS_URL } from '../../shared/constants';
 import { UserMenuItems } from '../components/UserMenuItems';
-import Button from '../components/Button';
+import UserActionButton from '../components/UserActionButton';
 import DarkModeSwitcher from '../admin/components/DarkModeSwitcher';
 
 export default function LandingPage() {
@@ -32,7 +32,12 @@ export default function LandingPage() {
               className='flex items-center -m-1.5 p-1.5 text-airt-font-base duration-300 ease-in-out hover:text-airt-secondary'
             >
               <NavLogo />
-              <span className='ml-2 text-sm font-semibold leading-6 dark:text-white'>FastAgency</span>
+              <span
+                className='ml-2 text-4xl font-rubik text-airt-font-base leading-6 dark:text-white'
+                style={{ marginTop: '3px' }}
+              >
+                FastAgency
+              </span>
             </a>
           </div>
           <div className='flex lg:hidden'>
@@ -62,6 +67,7 @@ export default function LandingPage() {
               {/* <ul className='flex justify-center items-center gap-2 2xsm:gap-4'>
                 <DarkModeSwitcher />
               </ul> */}
+              <UserActionButton user={user} renderGoToChat={false} theme='light' />
               {isUserLoading ? null : !user ? (
                 <Link to='/login'>
                   <div className='text-sm flex justify-end items-center duration-300 ease-in-out text-airt-font-base hover:text-airt-secondary dark:text-white'>
@@ -130,12 +136,13 @@ export default function LandingPage() {
         <div className='relative pt-14 w-full '>
           <div className='py-24 sm:py-32'>
             <div className='mx-auto max-w-8xl px-6 lg:px-8'>
-              <div className='lg:mb-18 mx-auto max-w-3xl text-center'>
-                <h1 className='text-4xl font-bold text-airt-font-base sm:text-6xl dark:text-white'>
-                  Some <span className='italic'>cool</span> words about your product
+              <div className='lg:mb-18 mx-auto max-w-5xl text-center'>
+                <h1 className='text-4xl font-rubik text-airt-font-base sm:text-6xl dark:text-white'>
+                  FastAgency.ai: Your <span className='italic'>multi-agent</span> AI digital marketing assistant.
                 </h1>
                 <p className='mt-6 mx-auto max-w-2xl text-lg leading-8 text-airt-font-base dark:text-white'>
-                  With some more exciting words about your product!
+                  Unleash the full potential of your advertising efforts with personalized, AI-driven strategies that
+                  evolve with your business. 30 days free trial, no credit card required!
                 </p>
                 <div className='mt-10 flex items-center justify-center gap-x-6'>
                   {/* <a
@@ -144,7 +151,7 @@ export default function LandingPage() {
                   >
                     Get Started <span aria-hidden='true'>→</span>
                   </a> */}
-                  <Button onClick={() => (window.location.href = '#')} label='Get Started' />
+                  <UserActionButton user={user} renderGoToChat={true} />
                 </div>
               </div>
               <div className='mt-14 flow-root sm:mt-14 '>
@@ -163,23 +170,27 @@ export default function LandingPage() {
         </div>
 
         {/* Feature section */}
-        <div id='features' className='mx-auto  max-w-7xl px-6 lg:px-8'>
+        <div id='features' className='mx-auto mt-5 max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl text-center'>
-            <p className='mt-2 text-4xl font-bold tracking-tight text-airt-font-base sm:text-5xl dark:text-white'>
-              <span className='text-airt-primary'>Features</span>
+            <p className='mt-2 text-4xl font-bold tracking-tight text-airt-font-base sm:text-5xl dark:text-airt-font-base'>
+              <span className='text-airt-font-base'>Features</span>
             </p>
+            {/* <p className='mt-6 text-lg leading-8 text-airt-font-base dark:text-airt-font-base'>
+              Don't work harder.
+              <br /> Work smarter.
+            </p> */}
           </div>
           <div className='mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl'>
             <dl className='grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16'>
               {features.map((feature) => (
-                <div key={feature.name} className='relative pl-16'>
-                  <dt className='text-base font-semibold leading-7 text-airt-font-base dark:text-white'>
-                    <div className='absolute left-0 top-0 flex h-10 w-10 items-center justify-center border border-airt-primary bg-airt-primary-100/50 dark:bg-boxdark rounded-lg'>
+                <div key={feature.name} className={`relative pl-16`}>
+                  <dt className='text-base font-semibold leading-7 text-airt-font-base dark:text-airt-font-base'>
+                    <div className='absolute left-0 top-0 flex h-10 w-10 items-center justify-center border border-airt-font-base bg-airt-font-base-100/50 dark:bg-boxdark rounded-lg'>
                       <div className='text-2xl'>{feature.icon}</div>
                     </div>
                     {feature.name}
                   </dt>
-                  <dd className='mt-2 text-base leading-7 text-airt-font-base dark:text-white'>
+                  <dd className='mt-2 text-base leading-7 text-airt-font-base dark:text-airt-font-base'>
                     {feature.description}
                   </dd>
                 </div>
@@ -189,7 +200,7 @@ export default function LandingPage() {
         </div>
 
         {/* Testimonial section */}
-        <div className='mx-auto mt-32 max-w-7xl sm:mt-56 sm:px-6 lg:px-8'>
+        {/* <div className='mx-auto mt-32 max-w-7xl sm:mt-56 sm:px-6 lg:px-8'>
           <div className='relative sm:left-5 -m-2 rounded-xl bg-airt-primary lg:ring-1 lg:ring-airt-primary lg:-m-4 '>
             <div className='relative sm:top-5 sm:right-5 bg-airt-font-base dark:bg-boxdark px-8 py-20 shadow-xl sm:rounded-xl sm:px-10 sm:py-16 md:px-12 lg:px-20'>
               <h2 className='text-left text-xl font-semibold tracking-wide leading-7 text-airt-primary dark:text-white'>
@@ -215,7 +226,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   );

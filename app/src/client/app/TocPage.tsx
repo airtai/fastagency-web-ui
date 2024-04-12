@@ -8,7 +8,7 @@ export default function TocPage() {
 
           <section className='mb-8'>
             <p>
-              These terms and conditions ("Terms") govern your access to and use of Capt’n.ai, a Software-as-a-Service
+              These terms and conditions ("Terms") govern your access to and use of FastAgency, a Software-as-a-Service
               tool ("Service") provided by airt technologies, Inc. ("we" or "us"). By accessing or using the Service,
               you agree to be bound by these Terms. If you do not agree to these Terms, you may not access or use the
               Service.
@@ -16,7 +16,7 @@ export default function TocPage() {
           </section>
 
           <section className='mb-8'>
-            <h2 className='text-xl font-semibold mb-2'>Use Terms for Capt’n.ai</h2>
+            <h2 className='text-xl font-semibold mb-2'>Use Terms for FastAgency</h2>
             <p>
               Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable license to use
               the Service for your internal business purposes during the term of these Terms.
@@ -39,11 +39,11 @@ export default function TocPage() {
 
           <section className='mb-8'>
             <h2 className='text-xl font-semibold mb-2'>Payment and Subscription</h2>
-            <p>By subscribing to Capt’n.ai, you agree to the following terms and conditions:</p>
+            <p>By subscribing to FastAgency, you agree to the following terms and conditions:</p>
             <br />
             <ul className='list-decimal pl-6'>
               <li>
-                <b>Subscription:</b> Capt’n.ai is offered on a subscription basis. You will be billed in advance on a
+                <b>Subscription:</b> FastAgency is offered on a subscription basis. You will be billed in advance on a
                 recurring and periodic basis (each period is referred to as a "billing cycle"). Billing cycles are set
                 either on a monthly or annual basis, depending on the type of subscription plan you select when
                 purchasing.
@@ -70,9 +70,9 @@ export default function TocPage() {
             </ul>
             <br />
             <p className='mb-4'>
-              If you have any questions about your Capt’n.ai subscription or these terms, please reach out to us at{' '}
-              <a href='mailto:support@captn.ai' className='no-underline hover:underline text-captn-light-blue'>
-                support@captn.ai
+              If you have any questions about your FastAgency subscription or these terms, please reach out to us at{' '}
+              <a href='mailto:support@fastagency.ai' className='no-underline hover:underline text-airt-primary'>
+                support@fastagency.ai
               </a>
               .
             </p>
@@ -184,8 +184,8 @@ export default function TocPage() {
             <h2 className='text-xl font-semibold mb-2'>Contact Us</h2>
             <p className='mb-4'>
               In order to receive further information regarding use of the Site, please contact us at:{' '}
-              <a href='mailto:support@captn.ai' className='no-underline hover:underline text-captn-light-blue'>
-                support@captn.ai
+              <a href='mailto:support@fastagency.ai' className='no-underline hover:underline text-airt-primary'>
+                support@fastagency.ai
               </a>
               .
             </p>
