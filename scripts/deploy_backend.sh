@@ -50,7 +50,7 @@ $ssh_command "docker container prune -f || echo 'No stopped containers to delete
 
 echo "INFO: pulling docker image"
 $ssh_command "echo $GITHUB_PASSWORD | docker login -u '$GITHUB_USERNAME' --password-stdin '$REGISTRY'"
-$ssh_command "docker pull ghcr.io/$GITHUB_REPOSITORY-python:'$TAG'"
+$ssh_command "docker pull ghcr.io/$GITHUB_REPOSITORY:'$TAG'"
 sleep 10
 
 echo "Deleting old image"
@@ -64,4 +64,4 @@ $ssh_command "docker run --name $container_name -p $PORT:$PORT -e PORT='$PORT' \
     -e WASP_SERVER_URL='$WASP_SERVER_URL' \
 	-e STRIPE_KEY='$STRIPE_KEY' -e PRO_SUBSCRIPTION_PRICE_ID='$PRO_SUBSCRIPTION_PRICE_ID' \
 	-e STRIPE_WEBHOOK_SECRET='$STRIPE_WEBHOOK_SECRET' -e ADMIN_EMAILS='$ADMIN_EMAILS' \
-	-d ghcr.io/$GITHUB_REPOSITORY-python:$TAG"
+	-d ghcr.io/$GITHUB_REPOSITORY:$TAG"
