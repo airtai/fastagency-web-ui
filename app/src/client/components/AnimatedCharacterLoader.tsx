@@ -10,7 +10,7 @@ interface AnimatedCharacterLoaderProps {
 
 const AnimatedCharacterLoader: React.FC<AnimatedCharacterLoaderProps> = ({
   loadingMessage = 'Loading...', // Default loading message
-  bgColor = 'bg-captn-dark-blue',
+  bgColor = 'airt-primary',
   showLogo = true,
 }) => {
   const [frameIndex, setFrameIndex] = useState(0); // State to track the current frame of the animation
@@ -45,10 +45,10 @@ const AnimatedCharacterLoader: React.FC<AnimatedCharacterLoaderProps> = ({
               width: '45px',
             }}
           >
-            <img alt='Capt’n.ai logo' src={logo} className='w-full h-full' style={{ borderRadius: '50%' }} />
+            <img alt='FastAgency logo' src={logo} className='w-full h-full' style={{ borderRadius: '50%' }} />
           </span>
         )}
-        <div className='chat-conversations text-base flex flex-col gap-2'>
+        <div className='chat-conversations text-base text-airt-primary flex flex-col gap-2'>
           {/* <Markdown> */}
           {loadingMessage} {loadingAnimation[frameIndex]}
           {/* </Markdown> */}

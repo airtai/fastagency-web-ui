@@ -66,7 +66,7 @@ export default function App({ children }: { children: ReactNode }) {
         {isAdminDashboard ? (
           <>{children}</>
         ) : (
-          <div className='flex flex-col min-h-screen justify-between'>
+          <div className='relative flex flex-col min-h-screen justify-between'>
             {shouldDisplayAppNavBar && <AppNavBar />}
             <div className='mx-auto max-w-7xl sm:px-6 lg:px-8 w-full'>
               {isError ? children : isLoading ? <LoadingComponent /> : (removeServerErrorClass(), children)}
