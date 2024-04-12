@@ -86,7 +86,6 @@ jobs:
     #     defaults:
     #         run:
     #             shell: bash
-    #     needs: [docker_build_push_python]
     #     if: github.ref_name == 'main' || github.ref_name == 'dev'
     #     env:
     #         GITHUB_USERNAME: ${{ github.actor }}
@@ -132,7 +131,6 @@ jobs:
 
     deploy_frontend:
         runs-on: ubuntu-22.04
-        # needs: [docker_build_push_python]
         permissions:
             contents: write
         if: github.ref_name == 'main' || github.ref_name == 'dev'
