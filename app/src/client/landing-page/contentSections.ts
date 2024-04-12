@@ -9,28 +9,31 @@ export const navigation = [
 ];
 export const features = [
   {
-    name: 'Cool Feature #1',
-    description: 'Describe your cool feature here.',
-    icon: '🤝',
-    href: DOCS_URL,
+    name: 'Intelligent Strategy Customization',
+    description: 'FastAgency tailors campaigns to your business goals using AI that understands your audience.',
+    icon: '🤖', //'🤝',
+    href: '',
   },
   {
-    name: 'Cool Feature #2',
-    description: 'Describe your cool feature here.',
+    name: '360° Campaign Management',
+    description:
+      'Our specialized AI agents manage everything from keyword selection to budget optimization, keeping your campaigns at peak efficiency.',
+    icon: '👍', //'🔐',
+    href: '',
+  },
+  {
+    name: 'Data Privacy First',
+    description:
+      'Your data remains secure. We offer real-time processing and optional chat history storage to ensure maximum privacy and security for your business information.',
     icon: '🔐',
-    href: DOCS_URL,
+    href: '',
   },
   {
-    name: 'Cool Feature #3',
-    description: 'Describe your cool feature here.',
-    icon: '🥞',
-    href: DOCS_URL,
-  },
-  {
-    name: 'Cool Feature #4',
-    description: 'Describe your cool feature here.',
-    icon: '💸',
-    href: DOCS_URL,
+    name: 'Seamless Integration',
+    description:
+      'FastAgency seamlessly integrates with your current workflows, beginning with Google Ads and quickly extending to more platforms.',
+    icon: '🤝', //'💸',
+    href: '',
   },
 ];
 export const testimonials = [
@@ -72,7 +75,7 @@ export const footerNavigation = {
   // ],
   company: [
     { name: 'About', href: 'https://airt.ai/' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
+    { name: 'Privacy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/toc' },
   ],
 };

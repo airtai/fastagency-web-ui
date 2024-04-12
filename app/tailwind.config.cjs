@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         satoshi: ['Satoshi', 'sans-serif'],
+        rubik: ['Rubik-Medium', 'sans-serif'],
       },
       colors: {
         'airt-primary': '#003257',
