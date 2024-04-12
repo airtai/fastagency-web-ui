@@ -7,7 +7,7 @@ app OpenSaaS {
         "<meta property='og:type' content='website' />",
         "<meta property='og:title' content='FastAgency' />",
         "<meta property='og:url' content='https://fastagency.ai/' />", 
-        "<meta property='og:description' content='FastAgency.ai: Your multi-agent AI digital marketing assistant.' />",
+        "<meta property='og:description' content='Quickly build scalable SaaS solutions using our powerful, multi-agent AI framework that streamlines complex processes.' />",
         "<meta property='og:image' content='https://fastagency.ai/public-banner.png' />",
         "<meta name='twitter:image' content='https://fastagency.ai/public-banner.png' />", 
         "<meta name='twitter:image:width' content='800' />",

@@ -12,7 +12,7 @@ import DarkModeSwitcher from '../admin/components/DarkModeSwitcher';
 import { UserMenuItems } from '../components/UserMenuItems';
 import { navigation } from '../landing-page/contentSections';
 
-const NavLogo = () => <img className='h-8 w-8' src={logo} alt='Your SaaS App' />;
+const NavLogo = () => <img className='h-8' src={logo} style={{ width: '1.8rem' }} alt='FastAgency' />;
 
 export default function AppNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -21,9 +21,13 @@ export default function AppNavBar() {
   return (
     <header className='absolute inset-x-0 top-0 z-50 shadow sticky bg-airt-primary backdrop-blur-lg backdrop-filter dark:border dark:border-gray-100/10 dark:bg-boxdark-2'>
       <nav className='flex items-center justify-between p-6 lg:px-8' aria-label='Global'>
-        <div className='flex lg:flex-1'>
-          <a href='/' className='-m-1.5 p-1.5'>
-            <img className='h-8 w-8' src={logo} alt='FastAgency' />
+        <div className='flex items-center lg:flex-1'>
+          <a
+            href='/'
+            className='flex items-center -m-1.5 p-1.5 text-airt-font-base duration-300 ease-in-out hover:text-airt-secondary'
+          >
+            <NavLogo />
+            <span className='ml-2 text-4xl font-rubik text-airt-font-base leading-6 dark:text-white'>FastAgency</span>
           </a>
         </div>
         <div className='flex lg:hidden'>
@@ -70,7 +74,7 @@ export default function AppNavBar() {
         <Dialog.Panel className='fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:text-white dark:bg-boxdark px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-airt-font-base'>
           <div className='flex items-center justify-between'>
             <a href='/' className='-m-1.5 p-1.5'>
-              <span className='sr-only'>Your SaaS</span>
+              <span className='sr-only'>FastAgency</span>
               <NavLogo />
             </a>
             <button
@@ -90,7 +94,7 @@ export default function AppNavBar() {
                     key={item.name}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-airt-font-base hover:bg-gray-50 dark:text-white hover:dark:bg-boxdark-2'
+                    className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-airt-primary hover:bg-gray-50 dark:text-white hover:dark:bg-boxdark-2'
                   >
                     {item.name}
                   </a>
@@ -107,9 +111,9 @@ export default function AppNavBar() {
                   <UserMenuItems user={user} setMobileMenuOpen={setMobileMenuOpen} />
                 )}
               </div>
-              <div className='py-6'>
+              {/* <div className='py-6'>
                 <DarkModeSwitcher />
-              </div>
+              </div> */}
             </div>
           </div>
         </Dialog.Panel>
