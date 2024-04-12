@@ -17,8 +17,7 @@ export const notificationMsg =
 
 const TosAndMarketingEmailsModal = () => {
   const history = useHistory();
-  const { isLoading, setSuccessMessage, setIsLoading } =
-    useContext(AuthContext);
+  const { isLoading, setSuccessMessage, setIsLoading } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>(null);
 
   const [tocChecked, setTocChecked] = useState(false);
@@ -34,9 +33,7 @@ const TosAndMarketingEmailsModal = () => {
     setTocChecked(event.target.checked);
   };
 
-  const handleMarketingEmailsChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleMarketingEmailsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMarketingEmailsChecked(event.target.checked);
   };
 
@@ -66,12 +63,10 @@ const TosAndMarketingEmailsModal = () => {
       {!isAccountPage && <AppNavBar />}
 
       <div className='flex items-center justify-center z-50 p-16 backdrop-blur-sm bg-captn-light-cream/30 mt-16'>
-        <div className='toc-marketing-container bg-captn-dark-blue rounded-lg shadow-lg p-8 m-4 max-w-xl mx-auto'>
+        <div className='toc-marketing-container bg-airt-primary rounded-lg shadow-lg p-8 m-4 max-w-xl mx-auto'>
           <div className='inner-wrapper'>
-            <h2 className='text-xl font-bold mb-4 text-captn-light-cream'>
-              Almost there...
-            </h2>
-            <p className='text-captn-light-cream'>{notificationMsg}</p>
+            <h2 className='text-xl font-bold mb-4 text-airt-font-base'>Almost there...</h2>
+            <p className='text-airt-font-base'>{notificationMsg}</p>
             <TosAndMarketingEmails
               tocChecked={tocChecked}
               handleTocChange={handleTocChange}
@@ -83,7 +78,7 @@ const TosAndMarketingEmailsModal = () => {
             <div className='mt-6 text-right'>
               <button
                 onClick={onClick}
-                className='mt-4 md:-mt-10 no-underline rounded-md px-3.5 py-2.5 text-sm text-captn-light-cream  hover:bg-captn-cta-green-hover shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:text-captn-light-cream bg-captn-cta-green '
+                className='mt-4 md:-mt-10 no-underline rounded-md px-3.5 py-2.5 text-sm  bg-airt-secondary text-airt-font-base hover:bg-opacity-85 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
               >
                 Save
               </button>

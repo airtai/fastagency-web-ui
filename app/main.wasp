@@ -31,7 +31,7 @@ app OpenSaaS {
       },
     },
     onAuthFailedRedirectTo: "/login",
-    onAuthSucceededRedirectTo: "/",
+    onAuthSucceededRedirectTo: "/chat",
   },
   db: { 
     system: PostgreSQL,

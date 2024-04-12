@@ -108,7 +108,24 @@ export default function App({ children }: { children: ReactNode }) {
                 <TosAndMarketingEmailsModal />
               </>
             ) : (
-              children
+              <>
+                {isAdminDashboard ? (
+                  children
+                ) : (
+                  <div className='relative flex flex-col min-h-screen justify-between'>
+                    {shouldDisplayAppNavBar && <AppNavBar />}
+                    {children}
+                    <div>
+                      <Footer />
+                      <div className='flex items-center h-20 bg-airt-footer-copyrights'>
+                        <p className='text-center w-full text-sm text-airt-font-base opacity-50'>
+                          © 2024 airt. All rights reserved.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </>
         ) : (

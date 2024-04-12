@@ -5,6 +5,7 @@ import { STRIPE_CUSTOMER_PORTAL_LINK } from '../../shared/constants';
 import { TierIds } from '../../shared/constants';
 import Button from '../components/Button';
 import FreeTrialButton from '../components/FreeTrialButton';
+import { MarketingEmailPreferenceSwitcher } from '../components/MarketingEmailPreferenceSwitcher';
 
 export default function AccountPage({ user }: { user: User }) {
   return (
@@ -63,10 +64,12 @@ export default function AccountPage({ user }: { user: User }) {
               )}
             </div>
             <div className='py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6'>
-              <dt className='text-sm font-medium text-airt-font-base dark:text-white'>About</dt>
-              <dd className='mt-1 text-sm text-airt-font-base dark:text-airt-font-base sm:col-span-2 sm:mt-0'>
-                I'm a cool customer.
-              </dd>
+              <dt className='text-sm font-medium text-airt-font-base'>I agree to receiving marketing emails</dt>
+              <>
+                <MarketingEmailPreferenceSwitcher
+                  hasSubscribedToMarketingEmails={user.hasSubscribedToMarketingEmails}
+                />
+              </>
             </div>
           </dl>
         </div>

@@ -45,8 +45,7 @@ const SocialAuthButtons = styled('div', {
 const googleSignInUrl = `${config.apiUrl}/auth/google/login`;
 
 export const checkBoxErrMsg = {
-  title:
-    "To proceed, please ensure you've accepted our Terms & Conditions and Privacy Policy.",
+  title: "To proceed, please ensure you've accepted our Terms & Conditions and Privacy Policy.",
   description: '',
 };
 
@@ -65,8 +64,7 @@ export const LoginSignupForm = ({
   additionalSignupFields?: any;
   errorMessage?: any;
 }) => {
-  const { isLoading, setErrorMessage, setSuccessMessage, setIsLoading } =
-    useContext(AuthContext);
+  const { isLoading, setErrorMessage, setSuccessMessage, setIsLoading } = useContext(AuthContext);
   const [tocChecked, setTocChecked] = useState(false);
   const [marketingEmailsChecked, setMarketingEmailsChecked] = useState(false);
   const [loginFlow, setLoginFlow] = useState(state);
@@ -87,9 +85,7 @@ export const LoginSignupForm = ({
     setTocChecked(event.target.checked);
   };
 
-  const handleMarketingEmailsChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleMarketingEmailsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMarketingEmailsChecked(event.target.checked);
   };
 
@@ -97,16 +93,10 @@ export const LoginSignupForm = ({
     localStorage.removeItem('hasAcceptedTos');
     localStorage.removeItem('hasSubscribedToMarketingEmails');
     localStorage.setItem('hasAcceptedTos', JSON.stringify(tocChecked));
-    localStorage.setItem(
-      'hasSubscribedToMarketingEmails',
-      JSON.stringify(marketingEmailsChecked)
-    );
+    localStorage.setItem('hasSubscribedToMarketingEmails', JSON.stringify(marketingEmailsChecked));
   };
 
-  const handleClick = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    googleSignInUrl: string
-  ) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, googleSignInUrl: string) => {
     event.preventDefault();
     if (loginFlow === State.Login) {
       updateLocalStorage();
@@ -121,8 +111,7 @@ export const LoginSignupForm = ({
     }
   };
 
-  const googleBtnText =
-    loginFlow === State.Login ? 'Sign in with Google' : 'Sign up with Google';
+  const googleBtnText = loginFlow === State.Login ? 'Sign in with Google' : 'Sign up with Google';
 
   return (
     <>
@@ -139,9 +128,7 @@ export const LoginSignupForm = ({
         <SocialAuthButtons gap='large' direction={socialButtonsDirection}>
           <button
             className='gsi-material-button'
-            onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-              handleClick(event, googleSignInUrl)
-            }
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => handleClick(event, googleSignInUrl)}
           >
             <div className='gsi-material-button-state'></div>
             <div className='gsi-material-button-content-wrapper'>
@@ -172,9 +159,7 @@ export const LoginSignupForm = ({
                   <path fill='none' d='M0 0h48v48H0z'></path>
                 </svg>
               </div>
-              <span className='gsi-material-button-contents'>
-                {googleBtnText}
-              </span>
+              <span className='gsi-material-button-contents'>{googleBtnText}</span>
               <span style={{ display: 'none' }}>{googleBtnText}</span>
             </div>
           </button>
@@ -182,12 +167,10 @@ export const LoginSignupForm = ({
       </SocialAuth>
       <div className='flex items-center justify-center'>
         <span className='text-sm block'>
-          {loginFlow === State.Login
-            ? "Don't have an account? "
-            : 'Already have an account? '}
+          {loginFlow === State.Login ? "Don't have an account? " : 'Already have an account? '}
           <Link
             to={loginFlow === State.Login ? '/signup' : '/login'}
-            className='no-underline hover:underline cursor-pointer'
+            className='no-underline hover:underline cursor-pointer text-airt-secondary'
           >
             {loginFlow === State.Login ? 'Sign up' : 'Sign in'}
           </Link>

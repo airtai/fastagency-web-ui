@@ -27,7 +27,7 @@ export const MessageSuccess = styled(Message, {
 });
 
 const logoStyle = {
-  height: '6rem',
+  height: '3rem',
 };
 
 const Container = styled('div', {
@@ -75,24 +75,14 @@ function Auth({
 
   // const title = titles[state];
 
-  const socialButtonsDirection =
-    socialLayout === 'vertical' ? 'vertical' : 'horizontal';
+  const socialButtonsDirection = socialLayout === 'vertical' ? 'vertical' : 'horizontal';
 
   return (
     <div className={customTheme}>
       <div>
-        {logo && (
-          <img
-            className='mt-10 mx-auto'
-            style={logoStyle}
-            src={logo}
-            alt='Capt’n.ai'
-          />
-        )}
+        {logo && <img className='mt-10 mx-auto' style={logoStyle} src={logo} alt='Capt’n.ai' />}
         {/* <HeaderText>{title}</HeaderText> */}
-        <p className='mt-7 text-2xl'>
-          {state === 'signup' ? titles.signup : titles.login}
-        </p>
+        <p className='mt-7 text-2xl'>{state === 'signup' ? titles.signup : titles.login}</p>
       </div>
 
       {/* {errorMessage && (
@@ -103,9 +93,7 @@ function Auth({
         </MessageError>
       )} */}
       {successMessage && <MessageSuccess>{successMessage}</MessageSuccess>}
-      <AuthContext.Provider
-        value={{ isLoading, setIsLoading, setErrorMessage, setSuccessMessage }}
-      >
+      <AuthContext.Provider value={{ isLoading, setIsLoading, setErrorMessage, setSuccessMessage }}>
         {(state === 'login' || state === 'signup') && (
           <LoginSignupForm
             state={state}

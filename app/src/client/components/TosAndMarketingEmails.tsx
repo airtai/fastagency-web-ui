@@ -30,39 +30,23 @@ const TosAndMarketingEmails: React.FC<TosAndMarketingEmailsProps> = ({
   handleMarketingEmailsChange,
   errorMessage,
 }) => (
-  <div className='toc-marketing-checkbox-wrapper text-captn-light-cream'>
+  <div className='toc-marketing-checkbox-wrapper text-airt-font-base'>
     <div className='mt-4'>
       <label className='checkbox-container text-sm mb-2' htmlFor='toc'>
         I agree to the{' '}
-        <Link
-          to='/toc'
-          className='no-underline hover:underline'
-          target='_blank'
-        >
+        <Link to='/toc' className='no-underline hover:underline text-airt-secondary' target='_blank'>
           Terms & Conditions
         </Link>{' '}
         and{' '}
-        <Link
-          to='/privacy'
-          className='no-underline hover:underline'
-          target='_blank'
-        >
+        <Link to='/privacy' className='no-underline hover:underline text-airt-secondary' target='_blank'>
           Privacy Policy
         </Link>
-        <input
-          type='checkbox'
-          id='toc'
-          checked={tocChecked}
-          onChange={handleTocChange}
-        />
+        <input type='checkbox' id='toc' checked={tocChecked} onChange={handleTocChange} />
         <span className='checkmark'></span>
       </label>
     </div>
     <div>
-      <label
-        className='checkbox-container text-sm mb-2'
-        htmlFor='marketingEmails'
-      >
+      <label className='checkbox-container text-sm mb-2' htmlFor='marketingEmails'>
         I agree to receiving marketing emails
         <input
           type='checkbox'
