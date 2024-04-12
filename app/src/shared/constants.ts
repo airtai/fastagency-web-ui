@@ -10,7 +10,7 @@ export const DOCS_URL = 'https://docs.opensaas.sh';
 export const BLOG_URL = 'https://docs.opensaas.sh/blog';
 
 const isDevEnv = process.env.NODE_ENV !== 'production';
-const customerPortalTestUrl = '<your-url-here>'; // TODO: find your test url at https://dashboard.stripe.com/test/settings/billing/portal
+const customerPortalTestUrl = 'https://billing.stripe.com/p/login/test_4gw7vg40I7vt00wbII'; // TODO: find your test url at https://dashboard.stripe.com/test/settings/billing/portal
 const customerPortalProdUrl = '<your-url-here>'; // TODO: add before deploying to production
 
 export const STRIPE_CUSTOMER_PORTAL_LINK = isDevEnv ? customerPortalTestUrl : customerPortalProdUrl;
