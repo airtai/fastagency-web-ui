@@ -17,7 +17,7 @@ export const notificationMsg =
 
 const TosAndMarketingEmailsModal = () => {
   const history = useHistory();
-  const { isLoading, setSuccessMessage, setIsLoading } = useContext(AuthContext);
+  // const { isLoading, setSuccessMessage, setIsLoading } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>(null);
 
   const [tocChecked, setTocChecked] = useState(false);

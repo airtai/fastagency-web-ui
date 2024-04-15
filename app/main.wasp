@@ -31,7 +31,7 @@ app OpenSaaS {
       },
     },
     onAuthFailedRedirectTo: "/login",
-    onAuthSucceededRedirectTo: "/playground",
+    onAuthSucceededRedirectTo: "/build",
   },
   db: { 
     system: PostgreSQL,
@@ -121,7 +121,12 @@ page LandingPage {
 
 route PlayGroundPageRoute { path: "/playground/:id?", to: PlayGroundPage }
 page PlayGroundPage {
-  component: import PlayGroundPageWithCustomAuthLayout from "@src/client/app/PlayGroundPage"
+  component: import PlayGroundPageWithCustomAuth from "@src/client/app/PlayGroundPage"
+}
+
+route BuildRoute { path: "/build", to: BuildPage }
+page BuildPage {
+  component: import BuildPageWithCustomAuth from "@src/client/app/BuildPage"
 }
 
 route LoginRoute { path: "/login", to: LoginPage }

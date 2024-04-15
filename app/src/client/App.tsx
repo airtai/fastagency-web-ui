@@ -53,6 +53,10 @@ export default function App({ children }: { children: ReactNode }) {
     return location.pathname.startsWith('/playground');
   }, [location]);
 
+  const isBuildPage = useMemo(() => {
+    return location.pathname.startsWith('/build');
+  }, [location]);
+
   useEffect(() => {
     if (user) {
       console.log('user', user);
@@ -101,7 +105,7 @@ export default function App({ children }: { children: ReactNode }) {
     <>
       <div className='bg-gradient-to-b from-airt-hero-gradient-start via-airt-hero-gradient-middle to-airt-secondary min-h-screen dark:text-white dark:bg-boxdark-2'>
         {isError && (addServerErrorClass(), (<ServerNotRechableComponent />))}
-        {isAdminDashboard || isPlayGroundPage ? (
+        {isAdminDashboard || isPlayGroundPage || isBuildPage ? (
           <>
             {showTosAndMarketingEmailsModal ? (
               <>
