@@ -37,6 +37,7 @@ export default function Footer() {
                   <a
                     href={item.href}
                     className='text-sm leading-6 text-airt-font-base hover:text-airt-font-base dark:text-white'
+                    target={`${item.name === 'airt' ? '_blank' : '_self'}`}
                   >
                     {item.name}
                   </a>
