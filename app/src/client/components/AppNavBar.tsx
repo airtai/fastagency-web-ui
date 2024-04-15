@@ -9,6 +9,7 @@ import logo from '../static/logo.svg';
 import DropdownUser from './DropdownUser';
 import { DOCS_URL, BLOG_URL } from '../../shared/constants';
 import DarkModeSwitcher from '../admin/components/DarkModeSwitcher';
+import UserActionButton from '../components/UserActionButton';
 import { UserMenuItems } from '../components/UserMenuItems';
 import { navigation } from '../landing-page/contentSections';
 
@@ -55,7 +56,7 @@ export default function AppNavBar() {
           {/* <ul className='flex justify-center items-center gap-2 sm:gap-4'>
             <DarkModeSwitcher />
           </ul> */}
-
+          <UserActionButton user={user} renderGoToChat={false} theme='light' />
           {isUserLoading ? null : !user ? (
             <a href={!user ? '/login' : '/account'} className='text-sm font-semibold leading-6 ml-4'>
               <div className='flex items-center duration-300 ease-in-out text-airt-font-base hover:text-airt-secondary dark:text-white'>
