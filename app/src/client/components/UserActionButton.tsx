@@ -15,7 +15,7 @@ const UserActionButton: React.FC<UserActionButtonProps> = ({ user, renderGoToCha
     return (
       <Link
         to='/signup'
-        className={`rounded-md px-3.5 py-2.5 text-sm  ${themeClass}   hover:bg-opacity-85 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+        className={`rounded-md px-3.5 pt-2 pb-2.5 text-sm  ${themeClass}   hover:bg-opacity-85 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
       >
         Create an account
       </Link>
