@@ -31,7 +31,7 @@ app OpenSaaS {
       },
     },
     onAuthFailedRedirectTo: "/login",
-    onAuthSucceededRedirectTo: "/chat",
+    onAuthSucceededRedirectTo: "/playground",
   },
   db: { 
     system: PostgreSQL,
@@ -119,9 +119,9 @@ page LandingPage {
   component: import LandingPage from "@src/client/landing-page/LandingPage"
 }
 
-route ChatPageRoute { path: "/chat/:id?", to: ChatPage }
-page ChatPage {
-  component: import createAuthRequiredChatPage from "@src/client/app/ChatPage"
+route PlayGroundPageRoute { path: "/playground/:id?", to: PlayGroundPage }
+page PlayGroundPage {
+  component: import PlayGroundPageWithCustomAuthLayout from "@src/client/app/PlayGroundPage"
 }
 
 route LoginRoute { path: "/login", to: LoginPage }
@@ -141,8 +141,7 @@ page PricingPage {
 
 route AccountRoute { path: "/account", to: AccountPage }
 page AccountPage {
-  authRequired: true,
-  component: import Account from "@src/client/app/AccountPage"
+  component: import AccountPageWithCustomAuth from "@src/client/app/AccountPage"
 }
 
 route CheckoutRoute { path: "/checkout", to: CheckoutPage }

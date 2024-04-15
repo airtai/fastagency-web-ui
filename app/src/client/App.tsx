@@ -49,8 +49,8 @@ export default function App({ children }: { children: ReactNode }) {
     return location.pathname.startsWith('/account');
   }, [location]);
 
-  const isChatPage = useMemo(() => {
-    return location.pathname.startsWith('/chat');
+  const isPlayGroundPage = useMemo(() => {
+    return location.pathname.startsWith('/playground');
   }, [location]);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export default function App({ children }: { children: ReactNode }) {
     <>
       <div className='bg-gradient-to-b from-airt-hero-gradient-start via-airt-hero-gradient-middle to-airt-secondary min-h-screen dark:text-white dark:bg-boxdark-2'>
         {isError && (addServerErrorClass(), (<ServerNotRechableComponent />))}
-        {isAdminDashboard || isChatPage ? (
+        {isAdminDashboard || isPlayGroundPage ? (
           <>
             {showTosAndMarketingEmailsModal ? (
               <>
