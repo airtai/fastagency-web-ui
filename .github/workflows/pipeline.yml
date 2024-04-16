@@ -86,6 +86,7 @@ jobs:
         defaults:
             run:
                 shell: bash
+        needs: [docker_build_push]
         if: github.ref_name == 'main' || github.ref_name == 'dev'
         env:
             GITHUB_USERNAME: ${{ github.actor }}
@@ -132,6 +133,7 @@ jobs:
         runs-on: ubuntu-22.04
         permissions:
             contents: write
+        needs: [docker_build_push]
         if: github.ref_name == 'main' || github.ref_name == 'dev'
         env:
           STAGING_BACKEND_DOMAIN: ${{ vars.STAGING_BACKEND_DOMAIN }}
