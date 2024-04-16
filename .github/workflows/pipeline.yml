@@ -92,7 +92,7 @@ jobs:
             GITHUB_USERNAME: ${{ github.actor }}
             GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
             PORT: ${{ vars.PORT }}
-            REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
+            REACT_APP_CUSTOMER_PORTAL_LINK: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_CUSTOMER_PORTAL_LINK || vars.STAGING_REACT_APP_CUSTOMER_PORTAL_LINK }}
             GOOGLE_CLIENT_ID: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_ID || secrets.STAGING_GOOGLE_CLIENT_ID }}
             GOOGLE_CLIENT_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_SECRET || secrets.STAGING_GOOGLE_CLIENT_SECRET }}
             ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
@@ -138,7 +138,7 @@ jobs:
         env:
           STAGING_BACKEND_DOMAIN: ${{ vars.STAGING_BACKEND_DOMAIN }}
           STAGING_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-          REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
+          REACT_APP_CUSTOMER_PORTAL_LINK: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_CUSTOMER_PORTAL_LINK || vars.STAGING_REACT_APP_CUSTOMER_PORTAL_LINK }}
           REACT_APP_API_URL: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_API_URL || vars.STAGING_REACT_APP_API_URL }}
         steps:
             - name: Checkout repository
