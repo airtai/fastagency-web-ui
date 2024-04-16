@@ -59,7 +59,6 @@ export default function App({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (user) {
-      console.log('user', user);
       if (!user.isSignUpComplete) {
         if (user.hasAcceptedTos) {
           updateCurrentUser({

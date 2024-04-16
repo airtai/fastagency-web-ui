@@ -1,10 +1,17 @@
 import { type User } from 'wasp/entities';
 import { HttpError } from 'wasp/server';
-import { type StripePayment, type UpdateCurrentUser, type UpdateUserById } from 'wasp/server/operations';
+import {
+  type StripePayment,
+  type UpdateCurrentUser,
+  type UpdateUserById,
+  type GetModels,
+} from 'wasp/server/operations';
 import Stripe from 'stripe';
 import type { StripePaymentResult } from '../shared/types';
 import { fetchStripeCustomer, createStripeCheckoutSession } from './payments/stripeUtils.js';
 import { TierIds } from '../shared/constants.js';
+
+const FASTAGENCY_SERVER_URL = process.env.FASTAGENCY_SERVER_URL || 'http://127.0.0.1:8000';
 
 export const stripePayment: StripePayment<string, StripePaymentResult> = async (tier, context) => {
   if (!context.user || !context.user.email) {
@@ -81,4 +88,28 @@ export const updateCurrentUser: UpdateCurrentUser<Partial<User>, User> = async (
     },
     data: user,
   });
+};
+
+export const getModels: GetModels<void, any> = async (user, context) => {
+  if (!context.user) {
+    throw new HttpError(401);
+  }
+
+  try {
+    const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/llms/schemas`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
+
+    if (!response.ok) {
+      const errorMsg = json.detail || `HTTP error with status code ${response.status}`;
+      console.error('Server Error:', errorMsg);
+      throw new Error(errorMsg);
+    }
+
+    return json;
+  } catch (error: any) {
+    throw new HttpError(500, error.message);
+  }
 };
