@@ -129,6 +129,26 @@ page BuildPage {
   component: import BuildPageWithCustomAuth from "@src/client/app/BuildPage"
 }
 
+route ToolsBoxRoute { path: "/build/ToolsBox", to: ToolsBoxPage }
+page ToolsBoxPage {
+  component: import ToolsBoxPage from "@src/client/app/ToolsBoxPage"
+}
+
+route ModelsRoute { path: "/build/models", to: ModelsPage }
+page ModelsPage {
+  component: import ModelsPage from "@src/client/app/ModelsPage"
+}
+
+route TeamsRoute { path: "/build/teams", to: TeamsPage }
+page TeamsPage {
+  component: import TeamsPage from "@src/client/app/TeamsPage"
+}
+
+route AgentsRoute { path: "/build/agents", to: AgentsPage }
+page AgentsPage {
+  component: import AgentsPage from "@src/client/app/AgentsPage"
+}
+
 route LoginRoute { path: "/login", to: LoginPage }
 page LoginPage {
   component: import Login from "@src/client/auth/LoginPage"

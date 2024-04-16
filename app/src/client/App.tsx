@@ -113,7 +113,8 @@ export default function App({ children }: { children: ReactNode }) {
               </>
             ) : (
               <>
-                {isAdminDashboard ? (
+                {children}
+                {/* {isAdminDashboard ? (
                   children
                 ) : (
                   <div className='relative flex flex-col min-h-screen justify-between'>
@@ -128,7 +129,7 @@ export default function App({ children }: { children: ReactNode }) {
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
               </>
             )}
           </>
