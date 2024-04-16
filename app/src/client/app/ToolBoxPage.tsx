@@ -1,10 +1,10 @@
 import CustomLayout from './layout/CustomLayout';
 import CustomBreadcrumb from '../components/CustomBreadcrumb';
 
-const ToolsBoxPage = () => {
+const ToolBoxPage = () => {
   return (
     <CustomLayout>
-      <CustomBreadcrumb pageName='Toolsbox' />
+      <CustomBreadcrumb pageName='ToolBox' />
       <div className='flex flex-col gap-10'>
         <div className='flex flex-col gap-4'>
           <div className='rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark'>
@@ -21,4 +21,4 @@ const ToolsBoxPage = () => {
   );
 };
 
-export default ToolsBoxPage;
+export default ToolBoxPage;

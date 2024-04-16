@@ -129,9 +129,9 @@ page BuildPage {
   component: import BuildPageWithCustomAuth from "@src/client/app/BuildPage"
 }
 
-route ToolsBoxRoute { path: "/build/ToolsBox", to: ToolsBoxPage }
-page ToolsBoxPage {
-  component: import ToolsBoxPage from "@src/client/app/ToolsBoxPage"
+route ToolBoxRoute { path: "/build/toolbox", to: ToolBoxPage }
+page ToolBoxPage {
+  component: import ToolBoxPage from "@src/client/app/toolboxPage"
 }
 
 route ModelsRoute { path: "/build/models", to: ModelsPage }

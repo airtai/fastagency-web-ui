@@ -113,6 +113,7 @@ export default function App({ children }: { children: ReactNode }) {
               </>
             ) : (
               <>
+                {shouldDisplayAppNavBar && <AppNavBar />}
                 {children}
                 {/* {isAdminDashboard ? (
                   children

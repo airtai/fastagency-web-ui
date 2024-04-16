@@ -54,7 +54,7 @@ const CustomSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     <aside
       ref={sidebar}
       className={cn(
-        'absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-airt-primary duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0',
+        'absolute left-0 top-0 z-9999 flex h-screen w-75 flex-col overflow-y-hidden bg-airt-primary duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0',
         {
           'translate-x-0': sidebarOpen,
           '-translate-x-full': !sidebarOpen,
@@ -62,7 +62,7 @@ const CustomSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       )}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className='flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5'>
+      {/* <div className='flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5'>
         <NavLink to='/'>
           <img src={Logo} alt='Logo' width={50} />
         </NavLink>
@@ -88,7 +88,7 @@ const CustomSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             />
           </svg>
         </button>
-      </div>
+      </div> */}
       {/* <!-- SIDEBAR HEADER --> */}
 
       <div className='no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear'>
@@ -101,8 +101,8 @@ const CustomSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             <ul className='mb-6 flex flex-col gap-1.5'>
               {/* <!-- Menu Item Dashboard --> */}
               <NavLink
-                to='/build/toolsbox'
-                isActive={(_match, location) => location.pathname === '/build/toolsbox'}
+                to='/build/toolbox'
+                isActive={(_match, location) => location.pathname === '/build/toolbox'}
                 className={(isActive) =>
                   cn(
                     'group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-airt-secondary dark:hover:bg-meta-4',
@@ -137,7 +137,7 @@ const CustomSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     fill=''
                   />
                 </svg>
-                ToolsBox
+                ToolBox
               </NavLink>
 
               {/* <!-- Menu Item Dashboard --> */}
