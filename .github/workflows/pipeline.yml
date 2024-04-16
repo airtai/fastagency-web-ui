@@ -86,16 +86,16 @@ jobs:
         defaults:
             run:
                 shell: bash
+        needs: [docker_build_push]
         if: github.ref_name == 'main' || github.ref_name == 'dev'
         env:
             GITHUB_USERNAME: ${{ github.actor }}
             GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
             PORT: ${{ vars.PORT }}
-            REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
+            REACT_APP_CUSTOMER_PORTAL_LINK: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_CUSTOMER_PORTAL_LINK || vars.STAGING_REACT_APP_CUSTOMER_PORTAL_LINK }}
             GOOGLE_CLIENT_ID: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_ID || secrets.STAGING_GOOGLE_CLIENT_ID }}
             GOOGLE_CLIENT_SECRET: ${{ github.ref_name == 'main' && secrets.PROD_GOOGLE_CLIENT_SECRET || secrets.STAGING_GOOGLE_CLIENT_SECRET }}
             ADMIN_EMAILS: ${{ vars.ADMIN_EMAILS }}
-
             WASP_SERVER_URL: ${{ github.ref_name == 'main' && vars.PROD_WASP_SERVER_URL || vars.STAGING_WASP_SERVER_URL }}
             ADS_SERVER_URL: ${{ github.ref_name == 'main' && vars.PROD_ADS_SERVER_URL || vars.STAGING_ADS_SERVER_URL }}
             BACKEND_DOMAIN: ${{ github.ref_name == 'main' && vars.PROD_BACKEND_DOMAIN || vars.STAGING_BACKEND_DOMAIN }}
@@ -133,11 +133,12 @@ jobs:
         runs-on: ubuntu-22.04
         permissions:
             contents: write
+        needs: [docker_build_push]
         if: github.ref_name == 'main' || github.ref_name == 'dev'
         env:
           STAGING_BACKEND_DOMAIN: ${{ vars.STAGING_BACKEND_DOMAIN }}
           STAGING_SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-          REACT_APP_CUSTOMER_PORTAL_LINK: ${{ vars.REACT_APP_CUSTOMER_PORTAL_LINK }}
+          REACT_APP_CUSTOMER_PORTAL_LINK: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_CUSTOMER_PORTAL_LINK || vars.STAGING_REACT_APP_CUSTOMER_PORTAL_LINK }}
           REACT_APP_API_URL: ${{ github.ref_name == 'main' && vars.PROD_REACT_APP_API_URL || vars.STAGING_REACT_APP_API_URL }}
         steps:
             - name: Checkout repository

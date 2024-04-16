@@ -17,13 +17,13 @@ check_variable "BACKEND_DOMAIN"
 check_variable "PORT"
 check_variable "DATABASE_URL"
 check_variable "WASP_WEB_CLIENT_URL"
-check_variable "WASP_SERVER_URL"
 check_variable "JWT_SECRET"
 check_variable "STRIPE_KEY"
 check_variable "PRO_SUBSCRIPTION_PRICE_ID"
 check_variable "STRIPE_WEBHOOK_SECRET"
 check_variable "GOOGLE_CLIENT_ID"
 check_variable "GOOGLE_CLIENT_SECRET"
+check_variable "WASP_SERVER_URL"
 
 
 
