@@ -137,7 +137,7 @@ const CustomSidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     fill=''
                   />
                 </svg>
-                ToolBox
+                ToolBoxes
               </NavLink>
 
               {/* <!-- Menu Item Dashboard --> */}

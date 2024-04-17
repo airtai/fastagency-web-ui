@@ -2,6 +2,7 @@ import { useAuth } from 'wasp/client/auth';
 import { useState, ReactNode, FC, useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import CustomSidebar from '../../components/CustomSidebar';
+import LoadingComponent from '../../components/LoadingComponent';
 import { cn } from '../../../shared/utils';
 
 interface Props {
@@ -10,16 +11,18 @@ interface Props {
 
 const CustomLayout: FC<Props> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { data: user } = useAuth();
+  const { data: user, isError, isSuccess, isLoading } = useAuth();
   const scrollRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
 
   useEffect(() => {
-    if (!user) {
-      history.push('/login');
-    } else {
-      if (!user.hasPaid && user.isSignUpComplete) {
-        history.push('/pricing');
+    if (isSuccess) {
+      if (!user) {
+        history.push('/login');
+      } else {
+        if (!user.hasPaid && user.isSignUpComplete) {
+          history.push('/pricing');
+        }
       }
     }
   }, [user, history]);
