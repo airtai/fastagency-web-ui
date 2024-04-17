@@ -131,7 +131,7 @@ page BuildPage {
 
 route ToolBoxRoute { path: "/build/toolbox", to: ToolBoxPage }
 page ToolBoxPage {
-  component: import ToolBoxPage from "@src/client/app/ToolboxPage"
+  component: import ToolBoxPage from "@src/client/app/ToolBoxPage"
 }
 
 route ModelsRoute { path: "/build/models", to: ModelsPage }
