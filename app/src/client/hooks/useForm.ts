@@ -8,8 +8,13 @@ export const useForm = (jsonSchema: JsonSchema) => {
   useEffect(() => {
     const initialValues: { [key: string]: any } = {};
     Object.keys(jsonSchema.properties).forEach((key) => {
-      // Ensure every field starts with a defined value, use an empty string as a fallback
-      initialValues[key] = jsonSchema.properties[key].default ?? '';
+      const property = jsonSchema.properties[key];
+      // Check for enum with exactly one value and set it, otherwise use default or fallback to an empty string
+      if (property.enum && property.enum.length === 1) {
+        initialValues[key] = property.enum[0]; // Auto-set single enum value
+      } else {
+        initialValues[key] = property.default ?? ''; // Use default or empty string if no default
+      }
     });
     setFormData(initialValues);
   }, [jsonSchema]);

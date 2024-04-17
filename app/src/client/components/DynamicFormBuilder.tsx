@@ -18,33 +18,37 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema }) =
   };
 
   return (
-    <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-9 sm:grid-cols-2 p-6.5'>
-      {Object.entries(jsonSchema.properties).map(([key, property]) => (
-        <div key={key}>
-          <label htmlFor={key}>{property.title}</label>
-          {property.enum ? (
-            <SelectInput
-              id={key}
-              value={formData[key]}
-              options={property.enum}
-              onChange={(value) => handleChange(key, value)}
-            />
-          ) : (
-            <TextInput
-              id={key}
-              value={formData[key]}
-              placeholder={property.description || ''}
-              onChange={(value) => handleChange(key, value)}
-            />
-          )}
-        </div>
-      ))}
-      <button
-        type='submit'
-        className='rounded-md px-3.5 py-2.5 text-sm  bg-airt-primary text-airt-font-base   hover:bg-opacity-85 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-      >
-        Submit
-      </button>
+    <form onSubmit={handleSubmit} className='grid grid-cols-1 md:grid-cols-2 gap-9 p-6.5'>
+      {Object.entries(jsonSchema.properties).map(([key, property]) =>
+        property?.enum?.length === 1 ? null : (
+          <div key={key} className='w-full'>
+            <label htmlFor={key}>{property.title}</label>
+            {property.enum ? (
+              <SelectInput
+                id={key}
+                value={formData[key]}
+                options={property.enum}
+                onChange={(value) => handleChange(key, value)}
+              />
+            ) : (
+              <TextInput
+                id={key}
+                value={formData[key]}
+                placeholder={property.description || ''}
+                onChange={(value) => handleChange(key, value)}
+              />
+            )}
+          </div>
+        )
+      )}
+      <div className='col-span-full'>
+        <button
+          type='submit'
+          className='rounded-md px-3.5 py-2.5 text-sm bg-airt-primary text-airt-font-base hover:bg-opacity-85 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

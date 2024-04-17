@@ -8,7 +8,7 @@ interface SelectInputProps {
 }
 
 export const SelectInput: React.FC<SelectInputProps> = ({ id, value, options, onChange }) => (
-  <select value={value} onChange={(e) => onChange(e.target.value)} className='my-2 p-2 border rounded' id={id}>
+  <select value={value} onChange={(e) => onChange(e.target.value)} className='my-2 p-2 border rounded w-full' id={id}>
     {options.map((option) => (
       <option key={option} value={option}>
         {option}

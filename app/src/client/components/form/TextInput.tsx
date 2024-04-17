@@ -13,7 +13,7 @@ export const TextInput: React.FC<TextInputProps> = ({ id, value, placeholder, on
     value={value}
     placeholder={placeholder}
     onChange={(e) => onChange(e.target.value)}
-    className='my-2 p-2 border rounded'
+    className='my-2 p-2 border rounded w-full'
     id={id}
   />
 );
