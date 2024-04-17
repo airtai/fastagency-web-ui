@@ -5,6 +5,7 @@ import {
   type UpdateCurrentUser,
   type UpdateUserById,
   type GetModels,
+  type ValidateForm,
 } from 'wasp/server/operations';
 import Stripe from 'stripe';
 import type { StripePaymentResult } from '../shared/types';
@@ -99,6 +100,34 @@ export const getModels: GetModels<void, any> = async (user, context) => {
     const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/llms/schemas`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
+    });
+    const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
+
+    if (!response.ok) {
+      const errorMsg = json.detail || `HTTP error with status code ${response.status}`;
+      console.error('Server Error:', errorMsg);
+      throw new Error(errorMsg);
+    }
+
+    return json;
+  } catch (error: any) {
+    throw new HttpError(500, error.message);
+  }
+};
+
+export const validateForm: ValidateForm<{ data: any; validationURL: string }, any> = async (
+  { data, validationURL }: { data: any; validationURL: string },
+  context: any
+) => {
+  if (!context.user) {
+    throw new HttpError(401);
+  }
+
+  try {
+    const response = await fetch(`${FASTAGENCY_SERVER_URL}/${validationURL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
     });
     const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
 

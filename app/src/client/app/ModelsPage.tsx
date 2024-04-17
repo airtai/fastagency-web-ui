@@ -12,6 +12,7 @@ import NotificationBox from '../components/NotificationBox';
 const ModelsPage = () => {
   const [modelsSchema, setModelsSchema] = useState<ModelSchema | null>(null);
   const [initialModelSchema, setInitialModelSchema] = useState<JsonSchema | null>(null);
+  const [selectedModel, setSelectedModel] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -21,6 +22,7 @@ const ModelsPage = () => {
       const response = await getModels();
       setModelsSchema(response);
       setInitialModelSchema(response.schemas[0].json_schema);
+      setSelectedModel(response.schemas[0].name);
     } catch (error: any) {
       setError('Something went wrong. Please try again later.');
       console.log(error);
@@ -36,6 +38,7 @@ const ModelsPage = () => {
     const foundSchema = modelsSchema?.schemas.find((schema) => schema.name === newModel);
     if (foundSchema) {
       setInitialModelSchema(foundSchema.json_schema);
+      setSelectedModel(foundSchema.name);
     }
   };
 
@@ -53,7 +56,12 @@ const ModelsPage = () => {
                 {modelsSchema && (
                   <>
                     <ModelFormContainer modelsSchema={modelsSchema} onModelChange={handleModelChange} />
-                    {initialModelSchema && <DynamicFormBuilder jsonSchema={initialModelSchema} />}
+                    {initialModelSchema && (
+                      <DynamicFormBuilder
+                        jsonSchema={initialModelSchema}
+                        validationURL={`models/llms/${selectedModel}/validate`}
+                      />
+                    )}
                   </>
                 )}
                 {error && <NotificationBox type={'error'} onClick={() => setError(null)} message={error} />}

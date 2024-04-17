@@ -270,6 +270,11 @@ action getModels {
   entities: []
 }
 
+action validateForm {
+  fn: import { validateForm } from "@src/server/actions.js",
+  entities: []
+}
+
 // 📚 Queries
 
 query getDailyStats {

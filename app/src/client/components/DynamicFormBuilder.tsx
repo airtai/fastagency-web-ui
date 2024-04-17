@@ -3,18 +3,21 @@ import { useForm } from '../hooks/useForm';
 import { JsonSchema } from '../interfaces/models';
 import { TextInput } from './form/TextInput';
 import { SelectInput } from './form/SelectInput';
+import { validateForm } from '../services/commonService';
 
 interface DynamicFormBuilderProps {
   jsonSchema: JsonSchema;
+  validationURL: string;
 }
 
-const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema }) => {
+const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, validationURL }) => {
   const { formData, handleChange } = useForm(jsonSchema);
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     console.log('Submitted Data:', formData);
-    // Add submission logic here
+    const response = await validateForm(formData, validationURL);
+    console.log('Validation Response:', response);
   };
 
   return (

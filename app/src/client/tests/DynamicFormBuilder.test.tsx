@@ -43,7 +43,7 @@ const jsonSchema: JsonSchema = {
 
 describe('DynamicFormBuilder', () => {
   test('renders form fields correctly', () => {
-    render(<DynamicFormBuilder jsonSchema={jsonSchema} />);
+    render(<DynamicFormBuilder jsonSchema={jsonSchema} validationURL='https://some-domain/some-route' />);
 
     expect(screen.getByLabelText('Model')).toBeInTheDocument();
     expect(screen.getByLabelText('API Key')).toBeInTheDocument();
