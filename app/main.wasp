@@ -265,8 +265,13 @@ action updateUserById {
   entities: [User]
 }
 
-action getModels {
-  fn: import { getModels } from "@src/server/actions.js",
+action getAvailableModels {
+  fn: import { getAvailableModels } from "@src/server/actions.js",
+  entities: []
+}
+
+action updateUserModels {
+  fn: import { updateUserModels } from "@src/server/actions.js",
   entities: []
 }
 
@@ -284,6 +289,11 @@ query getDailyStats {
 
 query getPaginatedUsers {
   fn: import { getPaginatedUsers } from "@src/server/queries.js",
+  entities: [User]
+}
+
+query getModels {
+  fn: import { getModels } from "@src/server/queries.js",
   entities: [User]
 }
 

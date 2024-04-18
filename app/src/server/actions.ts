@@ -4,15 +4,16 @@ import {
   type StripePayment,
   type UpdateCurrentUser,
   type UpdateUserById,
-  type GetModels,
+  type GetAvailableModels,
   type ValidateForm,
+  type UpdateUserModels,
 } from 'wasp/server/operations';
 import Stripe from 'stripe';
 import type { StripePaymentResult } from '../shared/types';
 import { fetchStripeCustomer, createStripeCheckoutSession } from './payments/stripeUtils.js';
 import { TierIds } from '../shared/constants.js';
 
-const FASTAGENCY_SERVER_URL = process.env.FASTAGENCY_SERVER_URL || 'http://127.0.0.1:8000';
+import { FASTAGENCY_SERVER_URL } from './common/constants';
 
 export const stripePayment: StripePayment<string, StripePaymentResult> = async (tier, context) => {
   if (!context.user || !context.user.email) {
@@ -91,7 +92,7 @@ export const updateCurrentUser: UpdateCurrentUser<Partial<User>, User> = async (
   });
 };
 
-export const getModels: GetModels<void, any> = async (user, context) => {
+export const getAvailableModels: GetAvailableModels<void, any> = async (user, context) => {
   if (!context.user) {
     throw new HttpError(401);
   }
@@ -110,6 +111,41 @@ export const getModels: GetModels<void, any> = async (user, context) => {
     }
 
     return json;
+  } catch (error: any) {
+    throw new HttpError(500, error.message);
+  }
+};
+
+type UpdateUserModelsValues = {
+  userId: number;
+  model: string;
+  base_url: string;
+  api_type: string;
+  api_version?: string;
+};
+
+type UpdateUserModelsPayload = {
+  data: UpdateUserModelsValues;
+};
+
+export const updateUserModels: UpdateUserModels<UpdateUserModelsPayload, void> = async (args, context) => {
+  if (!context.user) {
+    throw new HttpError(401);
+  }
+
+  try {
+    const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: context.user.id, ...args.data }),
+    });
+    const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
+
+    if (!response.ok) {
+      const errorMsg = json.detail || `HTTP error with status code ${response.status}`;
+      console.error('Server Error:', errorMsg);
+      throw new Error(errorMsg);
+    }
   } catch (error: any) {
     throw new HttpError(500, error.message);
   }
@@ -138,7 +174,7 @@ export const validateForm: ValidateForm<{ data: any; validationURL: string }, an
       );
     }
 
-    return json;
+    return data;
   } catch (error: any) {
     throw new HttpError(error.statusCode || 500, error.message || 'Server or network error occurred');
   }

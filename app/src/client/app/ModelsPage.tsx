@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { getModels, useQuery, updateUserModels } from 'wasp/client/operations';
+
 import CustomLayout from './layout/CustomLayout';
 import CustomBreadcrumb from '../components/CustomBreadcrumb';
 import Button from '../components/Button';
 import DynamicFormBuilder from '../components/DynamicFormBuilder';
 import Loader from '../admin/common/Loader';
-import { getModels } from '../services/modelService';
+import { getAvailableModels } from '../services/modelService';
 import { ModelSchema, JsonSchema } from '../interfaces/models';
 import ModelFormContainer from '../components/ModelFormContainer';
 import NotificationBox from '../components/NotificationBox';
@@ -15,11 +17,14 @@ const ModelsPage = () => {
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showAddModel, setShowAddModel] = useState(false);
+  const { data: modelsList, refetch: refetchModels } = useQuery(getModels);
 
   const fetchData = async () => {
+    setShowAddModel(true);
     setIsLoading(true);
     try {
-      const response = await getModels();
+      const response = await getAvailableModels();
       setModelsSchema(response);
       setInitialModelSchema(response.schemas[0].json_schema);
       setSelectedModel(response.schemas[0].name);
@@ -42,8 +47,10 @@ const ModelsPage = () => {
     }
   };
 
-  const onSuccessCallback = (data: any) => {
-    console.log('Form submitted with data:', data);
+  const onSuccessCallback = async (data: any) => {
+    await updateUserModels({ data });
+    refetchModels();
+    setShowAddModel(false);
   };
 
   return (
@@ -57,17 +64,26 @@ const ModelsPage = () => {
                 <Button onClick={() => fetchData()} label='Add Model' />
               </div>
               <div className='flex-col flex w-full'>
-                {modelsSchema && (
-                  <>
-                    <ModelFormContainer modelsSchema={modelsSchema} onModelChange={handleModelChange} />
-                    {initialModelSchema && (
-                      <DynamicFormBuilder
-                        jsonSchema={initialModelSchema}
-                        validationURL={`models/llms/${selectedModel}/validate`}
-                        onSuccessCallback={onSuccessCallback}
-                      />
-                    )}
-                  </>
+                {!showAddModel ? (
+                  modelsList ? (
+                    <div className='flex flex-col gap-3'>
+                      <h2 className='text-lg font-semibold'>Available Models</h2>
+                      <div className='flex flex-col gap-2'>{JSON.stringify(modelsList)}</div>
+                    </div>
+                  ) : null
+                ) : (
+                  modelsSchema && (
+                    <>
+                      <ModelFormContainer modelsSchema={modelsSchema} onModelChange={handleModelChange} />
+                      {initialModelSchema && (
+                        <DynamicFormBuilder
+                          jsonSchema={initialModelSchema}
+                          validationURL={`models/llms/${selectedModel}/validate`}
+                          onSuccessCallback={onSuccessCallback}
+                        />
+                      )}
+                    </>
+                  )
                 )}
                 {error && <NotificationBox type={'error'} onClick={() => setError(null)} message={error} />}
               </div>

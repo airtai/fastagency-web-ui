@@ -1,9 +1,9 @@
 // services/modelService.ts
-import { getModels as apiGetModels } from 'wasp/client/operations';
+import { getAvailableModels as apigetAvailableModels } from 'wasp/client/operations';
 
-export const getModels = async () => {
+export const getAvailableModels = async () => {
   try {
-    const response = await apiGetModels();
+    const response = await apigetAvailableModels();
     return response;
   } catch (error) {
     console.error('Failed to fetch models:', error);
