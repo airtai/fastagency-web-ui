@@ -129,16 +129,17 @@ export const validateForm: ValidateForm<{ data: any; validationURL: string }, an
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-    const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
 
+    const json = await response.json();
     if (!response.ok) {
-      const errorMsg = json.detail || `HTTP error with status code ${response.status}`;
-      console.error('Server Error:', errorMsg);
-      throw new Error(errorMsg);
+      throw new HttpError(
+        response.status,
+        JSON.stringify(json.detail) || `HTTP error with status code ${response.status}`
+      );
     }
 
     return json;
   } catch (error: any) {
-    throw new HttpError(500, error.message);
+    throw new HttpError(error.statusCode || 500, error.message || 'Server or network error occurred');
   }
 };

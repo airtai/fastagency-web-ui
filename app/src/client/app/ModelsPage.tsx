@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import CustomLayout from './layout/CustomLayout';
 import CustomBreadcrumb from '../components/CustomBreadcrumb';
 import Button from '../components/Button';
@@ -42,6 +42,10 @@ const ModelsPage = () => {
     }
   };
 
+  const onSuccessCallback = (data: any) => {
+    console.log('Form submitted with data:', data);
+  };
+
   return (
     <CustomLayout>
       <CustomBreadcrumb pageName='Models' />
@@ -60,6 +64,7 @@ const ModelsPage = () => {
                       <DynamicFormBuilder
                         jsonSchema={initialModelSchema}
                         validationURL={`models/llms/${selectedModel}/validate`}
+                        onSuccessCallback={onSuccessCallback}
                       />
                     )}
                   </>
