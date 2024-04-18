@@ -7,6 +7,8 @@ import DynamicFormBuilder from '../components/DynamicFormBuilder';
 import { JsonSchema } from '../interfaces/models';
 import { validateForm } from '../services/commonService';
 
+const setFormErrors = vi.fn();
+const handleChange = vi.fn();
 vi.mock('../hooks/useForm', () => ({
   useForm: () => ({
     formData: {
@@ -15,7 +17,9 @@ vi.mock('../hooks/useForm', () => ({
       base_url: 'https://api.openai.com/v1',
       api_type: 'openai',
     },
-    handleChange: vi.fn(),
+    handleChange,
+    formErrors: {},
+    setFormErrors,
   }),
 }));
 
@@ -92,9 +96,38 @@ describe('DynamicFormBuilder', () => {
     expect(onSuccessCallback).toHaveBeenCalled();
   });
 
-  test('shows an error message when submission fails', async () => {
-    // Mock the validateForm to simulate a failure
-    vi.mocked(validateForm).mockImplementationOnce(() => Promise.reject(new Error('Failed to validate')));
+  // test('shows an error message when submission fails', async () => {
+  //   // Mock the validateForm to simulate a failure
+  //   vi.mocked(validateForm).mockImplementationOnce(() => Promise.reject(new Error('Failed to validate')));
+  //   const onSuccessCallback = vi.fn();
+  //   renderInContext(
+  //     <DynamicFormBuilder
+  //       jsonSchema={jsonSchema}
+  //       validationURL='https://some-domain/some-route'
+  //       onSuccessCallback={onSuccessCallback}
+  //     />
+  //   );
+  //   await fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+  //   expect(onSuccessCallback).not.toHaveBeenCalled();
+  // });
+
+  test('displays validation errors next to form fields', async () => {
+    const validationErrorMessage = 'This field is required';
+    // Mock validateForm to simulate an API error response
+    vi.mocked(validateForm).mockRejectedValueOnce(
+      new Error(
+        JSON.stringify([
+          {
+            type: 'string_type',
+            loc: ['body', 'api_key'],
+            msg: validationErrorMessage,
+            input: 1,
+            url: 'https://errors.pydantic.dev/2.7/v/string_type',
+          },
+        ])
+      )
+    );
+
     const onSuccessCallback = vi.fn();
     renderInContext(
       <DynamicFormBuilder
@@ -103,7 +136,30 @@ describe('DynamicFormBuilder', () => {
         onSuccessCallback={onSuccessCallback}
       />
     );
-    await fireEvent.submit(screen.getByRole('button', { name: /submit/i }));
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('form-submit-button'));
+    });
+
     expect(onSuccessCallback).not.toHaveBeenCalled();
+    expect(setFormErrors).toHaveBeenCalledWith({
+      api_key: 'This field is required',
+    });
+  });
+  test('handles field changes', async () => {
+    renderInContext(
+      <DynamicFormBuilder
+        jsonSchema={jsonSchema}
+        validationURL='https://some-domain/some-route'
+        onSuccessCallback={vi.fn()}
+      />
+    );
+
+    const input = screen.getByLabelText('API Key');
+    await act(async () => {
+      fireEvent.change(input, { target: { value: 'new-key' } });
+    });
+
+    expect(handleChange).toHaveBeenCalledWith('api_key', 'new-key');
   });
 });

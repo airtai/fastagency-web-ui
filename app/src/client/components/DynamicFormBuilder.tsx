@@ -4,8 +4,8 @@ import { JsonSchema } from '../interfaces/models';
 import { TextInput } from './form/TextInput';
 import { SelectInput } from './form/SelectInput';
 import { validateForm } from '../services/commonService';
-import NotificationBox from '../components/NotificationBox';
-import { object } from 'zod';
+import { parseValidationErrors } from '../app/utils/formHelpers';
+import Loader from '../admin/common/Loader';
 
 interface DynamicFormBuilderProps {
   jsonSchema: JsonSchema;
@@ -14,8 +14,7 @@ interface DynamicFormBuilderProps {
 }
 
 const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, validationURL, onSuccessCallback }) => {
-  const { formData, handleChange } = useForm(jsonSchema);
-  const [error, setError] = useState<string | null>(null);
+  const { formData, handleChange, formErrors, setFormErrors } = useForm(jsonSchema);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -23,12 +22,11 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, val
     setIsLoading(true);
     try {
       const response = await validateForm(formData, validationURL);
-      setError(null);
       onSuccessCallback(response);
     } catch (error: any) {
-      setError(error.message);
-      console.log(JSON.parse(error.message));
-      console.log(typeof JSON.parse(error.message));
+      const errorMsgObj = JSON.parse(error.message);
+      const errors = parseValidationErrors(errorMsgObj);
+      setFormErrors(errors);
     }
     setIsLoading(false);
   };
@@ -55,6 +53,7 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, val
                   onChange={(value) => handleChange(key, value)}
                 />
               )}
+              {formErrors[key] && <div style={{ color: 'red' }}>{formErrors[key]}</div>}
             </div>
           )
         )}
@@ -69,7 +68,11 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, val
           </button>
         </div>
       </form>
-      {error && <NotificationBox type={'error'} onClick={() => setError(null)} message={error} />}
+      {isLoading && (
+        <div className='absolute inset-0 flex items-center justify-center bg-white bg-opacity-50'>
+          <Loader />
+        </div>
+      )}
     </>
   );
 };

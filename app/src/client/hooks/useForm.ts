@@ -1,33 +1,33 @@
-// hooks/useForm.ts
 import { useState, useEffect } from 'react';
 import { JsonSchema } from '../interfaces/models';
 
 export const useForm = (jsonSchema: JsonSchema) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
+  const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     const initialValues: { [key: string]: any } = {};
     Object.keys(jsonSchema.properties).forEach((key) => {
       const property = jsonSchema.properties[key];
-      // Check for enum with exactly one value and set it, otherwise use default or fallback to an empty string
       if (property.enum && property.enum.length === 1) {
-        initialValues[key] = property.enum[0]; // Auto-set single enum value
+        initialValues[key] = property.enum[0];
       } else {
-        initialValues[key] = property.default ?? ''; // Use default or empty string if no default
+        initialValues[key] = property.default ?? '';
       }
     });
     setFormData(initialValues);
+    setFormErrors({}); // Reset errors on schema change
   }, [jsonSchema]);
 
   const handleChange = (key: string, value: any) => {
-    setFormData((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [key]: value }));
+    setFormErrors((prev) => ({ ...prev, [key]: '' })); // Clear error on change
   };
 
   return {
     formData,
     handleChange,
+    formErrors,
+    setFormErrors, // Expose this to allow setting errors from the component
   };
 };
