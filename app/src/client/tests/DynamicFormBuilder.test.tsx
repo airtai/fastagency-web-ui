@@ -71,6 +71,7 @@ describe('DynamicFormBuilder', () => {
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
         onSuccessCallback={vi.fn()}
+        onCancelCallback={vi.fn()}
       />
     );
     expect(screen.getByLabelText('Model')).toBeInTheDocument();
@@ -85,6 +86,7 @@ describe('DynamicFormBuilder', () => {
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
         onSuccessCallback={onSuccessCallback}
+        onCancelCallback={vi.fn()}
       />
     );
 
@@ -134,6 +136,7 @@ describe('DynamicFormBuilder', () => {
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
         onSuccessCallback={onSuccessCallback}
+        onCancelCallback={vi.fn()}
       />
     );
 
@@ -152,6 +155,7 @@ describe('DynamicFormBuilder', () => {
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
         onSuccessCallback={vi.fn()}
+        onCancelCallback={vi.fn()}
       />
     );
 

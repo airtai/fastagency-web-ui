@@ -53,6 +53,10 @@ const ModelsPage = () => {
     setShowAddModel(false);
   };
 
+  const onCancelCallback = () => {
+    setShowAddModel(false);
+  };
+
   return (
     <CustomLayout>
       <CustomBreadcrumb pageName='Models' />
@@ -65,12 +69,58 @@ const ModelsPage = () => {
               </div>
               <div className='flex-col flex w-full'>
                 {!showAddModel ? (
-                  modelsList ? (
+                  modelsList && modelsList.length > 0 ? (
                     <div className='flex flex-col gap-3'>
-                      <h2 className='text-lg font-semibold'>Available Models</h2>
-                      <div className='flex flex-col gap-2'>{JSON.stringify(modelsList)}</div>
+                      <h2 className='text-lg font-semibold text-airt-primary'>Available Models</h2>
+                      <div className='grid grid-cols-3 gap-3'>
+                        {modelsList.map((model) => {
+                          return (
+                            <div className='group relative cursor-pointer overflow-hidden bg-airt-primary text-airt-font-base px-6 pt-10 pb-8  transition-all duration-300 hover:-translate-y-1 sm:max-w-sm sm:rounded-lg sm:pl-8 sm:pr-24'>
+                              <span className='absolute top-10 z-0 h-8 w-8 rounded-full bg-airt-hero-gradient-start transition-all duration-300 group-hover:scale-[30]'></span>
+                              <div className='relative z-10 mx-auto max-w-md'>
+                                <div className='flex items-center mb-3'>
+                                  <div className='w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full dark:bg-indigo-500 bg-airt-hero-gradient-start text-white flex-shrink-0'>
+                                    <svg
+                                      fill='none'
+                                      stroke='currentColor'
+                                      strokeLinecap='round'
+                                      strokeLinejoin='round'
+                                      strokeWidth='2'
+                                      className='w-5 h-5'
+                                      viewBox='0 0 24 24'
+                                    >
+                                      <path d='M22 12h-4l-3 9L9 3l-3 9H2'></path>
+                                    </svg>
+                                  </div>
+                                  <h2 className='text-white dark:text-white text-lg font-medium'>
+                                    {model.api_type.toUpperCase()}
+                                  </h2>
+                                </div>
+                                <div className='flex flex-col gap-2 text-white py-4 sm:max-w-sm sm:rounded-lg'>
+                                  <p>Model: {model.model}</p>
+                                </div>
+                                {/* <div className='pt-5 text-base font-semibold leading-7'>
+                                  <p>
+                                    <a
+                                      href='#'
+                                      className='text-sky-500 transition-all duration-300 group-hover:text-white'
+                                    >
+                                      Update &rarr;
+                                    </a>
+                                  </p>
+                                </div> */}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  ) : null
+                  ) : (
+                    <div className='flex flex-col gap-3'>
+                      <h2 className='text-lg font-semibold text-airt-primary'>Available Models</h2>
+                      <p className='text-airt-primary/50 pt-2'>Please add a new model...</p>
+                    </div>
+                  )
                 ) : (
                   modelsSchema && (
                     <>
@@ -80,6 +130,7 @@ const ModelsPage = () => {
                           jsonSchema={initialModelSchema}
                           validationURL={`models/llms/${selectedModel}/validate`}
                           onSuccessCallback={onSuccessCallback}
+                          onCancelCallback={onCancelCallback}
                         />
                       )}
                     </>

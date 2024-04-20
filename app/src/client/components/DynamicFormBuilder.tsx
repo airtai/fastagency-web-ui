@@ -11,9 +11,15 @@ interface DynamicFormBuilderProps {
   jsonSchema: JsonSchema;
   validationURL: string;
   onSuccessCallback: (data: any) => void;
+  onCancelCallback: (data: any) => void;
 }
 
-const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, validationURL, onSuccessCallback }) => {
+const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
+  jsonSchema,
+  validationURL,
+  onSuccessCallback,
+  onCancelCallback,
+}) => {
   const { formData, handleChange, formErrors, setFormErrors } = useForm(jsonSchema);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -64,7 +70,15 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({ jsonSchema, val
             disabled={isLoading}
             data-testid='form-submit-button'
           >
-            Submit
+            Save
+          </button>
+          <button
+            className='ml-3 rounded-md px-3.5 py-2.5 text-sm border border-airt-error text-airt-primary hover:bg-opacity-10 hover:bg-airt-error shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+            disabled={isLoading}
+            data-testid='form-cancel-button'
+            onClick={onCancelCallback}
+          >
+            Cancel
           </button>
         </div>
       </form>
