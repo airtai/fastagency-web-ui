@@ -129,8 +129,8 @@ const CustomLayout: FC<Props> = ({ children }) => {
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
-          <main className='mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10' ref={scrollRef}>
-            <div>{children}</div>
+          <main className='lg:mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10' ref={scrollRef}>
+            <div className='w-full lg:min-w-[700px] 2xl:min-w-[1000px]'>{children}</div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
           <></>
