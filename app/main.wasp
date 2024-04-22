@@ -275,6 +275,11 @@ action updateUserModels {
   entities: []
 }
 
+action addUserModels {
+  fn: import { addUserModels } from "@src/server/actions.js",
+  entities: []
+}
+
 action validateForm {
   fn: import { validateForm } from "@src/server/actions.js",
   entities: []

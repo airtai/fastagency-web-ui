@@ -28,13 +28,10 @@ const ModelForm: React.FC<ModelFormProps> = ({
     <div>
       {modelSchemas && (
         <>
-          <ModelFormContainer
-            selectedModel={
-              updateExistingModel ? (updateExistingModel.api_type === 'openai' ? 'openai' : 'azureoai') : null
-            }
-            modelSchemas={modelSchemas}
-            onModelChange={onModelChange}
-          />
+          {updateExistingModel && <h2 className='text-lg font-semibold text-airt-primary'>Update model</h2>}
+          {!updateExistingModel && (
+            <ModelFormContainer selectedModel={null} modelSchemas={modelSchemas} onModelChange={onModelChange} />
+          )}
           {initialModelSchema && (
             <DynamicFormBuilder
               jsonSchema={initialModelSchema}

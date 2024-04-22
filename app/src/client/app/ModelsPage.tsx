@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getModels, useQuery, updateUserModels } from 'wasp/client/operations';
+import { getModels, useQuery, updateUserModels, addUserModels } from 'wasp/client/operations';
 
 import { useModels, ModelsActionType } from '../hooks/useModels';
 import CustomLayout from './layout/CustomLayout';
@@ -26,7 +26,10 @@ const ModelsPage = () => {
   };
 
   const onSuccessCallback = async (data: any) => {
-    await updateUserModels({ data });
+    state.updateExistingModel
+      ? await updateUserModels({ data, uuid: state.updateExistingModel.uuid })
+      : await addUserModels({ data });
+
     refetchModels();
     dispatch({ type: ModelsActionType.TOGGLE_ADD_MODEL, payload: false });
   };

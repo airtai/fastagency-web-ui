@@ -20,8 +20,18 @@ export const useForm = ({ jsonSchema, defaultValues }: UseFormProps) => {
   useEffect(() => {
     const initialFormData: FormData = {};
     Object.keys(jsonSchema.properties).forEach((key) => {
-      initialFormData[key] =
-        defaultValues && defaultValues.hasOwnProperty(key) ? getValueFromModel(defaultValues, key as keyof Model) : '';
+      const property = jsonSchema.properties[key];
+      if (defaultValues) {
+        initialFormData[key] = defaultValues.hasOwnProperty(key)
+          ? getValueFromModel(defaultValues, key as keyof Model)
+          : '';
+      } else {
+        if (property.enum && property.enum.length === 1) {
+          initialFormData[key] = property.enum[0]; // Auto-set single enum value
+        } else {
+          initialFormData[key] = property.default ?? ''; // Use default or empty string if no default
+        }
+      }
     });
     setFormData(initialFormData);
     setFormErrors({}); // Reset errors on schema change

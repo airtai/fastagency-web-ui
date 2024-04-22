@@ -7,6 +7,7 @@ import {
   type GetAvailableModels,
   type ValidateForm,
   type UpdateUserModels,
+  type AddUserModels,
 } from 'wasp/server/operations';
 import Stripe from 'stripe';
 import type { StripePaymentResult } from '../shared/types';
@@ -116,7 +117,7 @@ export const getAvailableModels: GetAvailableModels<void, any> = async (user, co
   }
 };
 
-type UpdateUserModelsValues = {
+type AddModelsValues = {
   userId: number;
   model: string;
   base_url: string;
@@ -124,8 +125,45 @@ type UpdateUserModelsValues = {
   api_version?: string;
 };
 
+type AddUserModelsPayload = {
+  data: AddModelsValues;
+};
+
+export const addUserModels: AddUserModels<AddUserModelsPayload, void> = async (args, context) => {
+  if (!context.user) {
+    throw new HttpError(401);
+  }
+
+  try {
+    const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/add`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: context.user.id, ...args.data }),
+    });
+    const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
+
+    if (!response.ok) {
+      const errorMsg = json.detail || `HTTP error with status code ${response.status}`;
+      console.error('Server Error:', errorMsg);
+      throw new Error(errorMsg);
+    }
+  } catch (error: any) {
+    throw new HttpError(500, error.message);
+  }
+};
+
+type UpdateUserModelsValues = {
+  userId: number;
+  model: string;
+  base_url: string;
+  api_type: string;
+  api_version?: string;
+  uuid: string;
+};
+
 type UpdateUserModelsPayload = {
   data: UpdateUserModelsValues;
+  uuid: string;
 };
 
 export const updateUserModels: UpdateUserModels<UpdateUserModelsPayload, void> = async (args, context) => {
@@ -135,9 +173,9 @@ export const updateUserModels: UpdateUserModels<UpdateUserModelsPayload, void> =
 
   try {
     const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/update`, {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: context.user.id, ...args.data }),
+      body: JSON.stringify({ userId: context.user.id, ...args.data, uuid: args.uuid }),
     });
     const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
 
