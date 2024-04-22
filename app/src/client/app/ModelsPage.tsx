@@ -44,6 +44,10 @@ const ModelsPage = () => {
       );
       if (foundSchema) {
         dispatch({ type: ModelsActionType.UPDATE_EXISTING_MODEL, payload: selectedModel });
+        dispatch({
+          type: ModelsActionType.SELECT_MODEL,
+          payload: { json_schema: foundSchema.json_schema, name: foundSchema.name },
+        });
       }
     }
   };

@@ -1,23 +1,31 @@
 import { useState, useEffect } from 'react';
-import { JsonSchema } from '../interfaces/ModelInterfaces';
+import { JsonSchema, Model } from '../interfaces/ModelInterfaces';
 
-export const useForm = (jsonSchema: JsonSchema) => {
+interface UseFormProps {
+  jsonSchema: JsonSchema;
+  defaultValues?: Model | null;
+}
+interface FormData {
+  [key: string]: any;
+}
+
+function getValueFromModel(model: Model, key: keyof Model): string | undefined {
+  return model[key];
+}
+
+export const useForm = ({ jsonSchema, defaultValues }: UseFormProps) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    const initialValues: { [key: string]: any } = {};
+    const initialFormData: FormData = {};
     Object.keys(jsonSchema.properties).forEach((key) => {
-      const property = jsonSchema.properties[key];
-      if (property.enum && property.enum.length === 1) {
-        initialValues[key] = property.enum[0];
-      } else {
-        initialValues[key] = property.default ?? '';
-      }
+      initialFormData[key] =
+        defaultValues && defaultValues.hasOwnProperty(key) ? getValueFromModel(defaultValues, key as keyof Model) : '';
     });
-    setFormData(initialValues);
+    setFormData(initialFormData);
     setFormErrors({}); // Reset errors on schema change
-  }, [jsonSchema]);
+  }, [jsonSchema, defaultValues]);
 
   const handleChange = (key: string, value: any) => {
     setFormData((prev) => ({ ...prev, [key]: value }));

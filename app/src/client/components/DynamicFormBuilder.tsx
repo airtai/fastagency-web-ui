@@ -24,7 +24,10 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
   onSuccessCallback,
   onCancelCallback,
 }) => {
-  const { formData, handleChange, formErrors, setFormErrors } = useForm(jsonSchema);
+  const { formData, handleChange, formErrors, setFormErrors } = useForm({
+    jsonSchema,
+    defaultValues: updateExistingModel,
+  });
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -44,11 +47,7 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
     <>
       <form onSubmit={handleSubmit} className='grid grid-cols-1 md:grid-cols-2 gap-9 p-6.5'>
         {Object.entries(jsonSchema.properties).map(([key, property]) => {
-          const inputValue =
-            updateExistingModel && updateExistingModel.hasOwnProperty(key)
-              ? // @ts-ignore
-                updateExistingModel[key] || ''
-              : formData[key] || '';
+          const inputValue = formData[key] || '';
 
           return property?.enum?.length === 1 ? null : (
             <div key={key} className='w-full'>
