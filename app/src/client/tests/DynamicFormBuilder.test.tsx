@@ -6,6 +6,7 @@ import { renderInContext } from 'wasp/client/test';
 import DynamicFormBuilder from '../components/DynamicFormBuilder';
 import { JsonSchema } from '../interfaces/models';
 import { validateForm } from '../services/commonService';
+import { UpdateExistingModelType } from '../interfaces/models';
 
 const setFormErrors = vi.fn();
 const handleChange = vi.fn();
@@ -64,12 +65,20 @@ const jsonSchema: JsonSchema = {
   type: '',
 };
 
+const updateExistingModel: UpdateExistingModelType = {
+  model: 'gpt-3.5-turbo',
+  base_url: 'https://api.openai.com/v1',
+  api_type: 'openai',
+  uuid: '1234',
+};
+
 describe('DynamicFormBuilder', () => {
   test('renders form fields correctly', () => {
     renderInContext(
       <DynamicFormBuilder
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
+        updateExistingModel={updateExistingModel}
         onSuccessCallback={vi.fn()}
         onCancelCallback={vi.fn()}
       />
@@ -85,6 +94,7 @@ describe('DynamicFormBuilder', () => {
       <DynamicFormBuilder
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
+        updateExistingModel={updateExistingModel}
         onSuccessCallback={onSuccessCallback}
         onCancelCallback={vi.fn()}
       />
@@ -135,6 +145,7 @@ describe('DynamicFormBuilder', () => {
       <DynamicFormBuilder
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
+        updateExistingModel={updateExistingModel}
         onSuccessCallback={onSuccessCallback}
         onCancelCallback={vi.fn()}
       />
@@ -154,6 +165,7 @@ describe('DynamicFormBuilder', () => {
       <DynamicFormBuilder
         jsonSchema={jsonSchema}
         validationURL='https://some-domain/some-route'
+        updateExistingModel={updateExistingModel}
         onSuccessCallback={vi.fn()}
         onCancelCallback={vi.fn()}
       />

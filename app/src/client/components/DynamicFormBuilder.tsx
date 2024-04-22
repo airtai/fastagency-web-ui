@@ -7,9 +7,12 @@ import { validateForm } from '../services/commonService';
 import { parseValidationErrors } from '../app/utils/formHelpers';
 import Loader from '../admin/common/Loader';
 
+import { UpdateExistingModelType } from '../interfaces/models';
+
 interface DynamicFormBuilderProps {
   jsonSchema: JsonSchema;
   validationURL: string;
+  updateExistingModel: UpdateExistingModelType | null;
   onSuccessCallback: (data: any) => void;
   onCancelCallback: (data: any) => void;
 }
@@ -17,6 +20,7 @@ interface DynamicFormBuilderProps {
 const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
   jsonSchema,
   validationURL,
+  updateExistingModel,
   onSuccessCallback,
   onCancelCallback,
 }) => {
@@ -36,7 +40,6 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
     }
     setIsLoading(false);
   };
-
   return (
     <>
       <form onSubmit={handleSubmit} className='grid grid-cols-1 md:grid-cols-2 gap-9 p-6.5'>
@@ -47,14 +50,24 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
               {property.enum ? (
                 <SelectInput
                   id={key}
-                  value={formData[key]}
+                  value={
+                    updateExistingModel && updateExistingModel.hasOwnProperty(key)
+                      ? // @ts-ignore
+                        updateExistingModel[key]
+                      : formData[key]
+                  }
                   options={property.enum}
                   onChange={(value) => handleChange(key, value)}
                 />
               ) : (
                 <TextInput
                   id={key}
-                  value={formData[key]}
+                  value={
+                    updateExistingModel && updateExistingModel.hasOwnProperty(key)
+                      ? // @ts-ignore
+                        updateExistingModel[key]
+                      : formData[key]
+                  }
                   placeholder={property.description || ''}
                   onChange={(value) => handleChange(key, value)}
                 />

@@ -111,6 +111,7 @@ type GetModelsValues = {
   base_url: string;
   api_type: string;
   api_version?: string;
+  uuid: string;
 };
 
 export const getModels: GetModels<void, GetModelsValues[]> = async (_args, context) => {

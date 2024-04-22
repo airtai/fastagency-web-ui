@@ -26,3 +26,11 @@ export interface Schema {
 export interface ModelSchema {
   schemas: Schema[];
 }
+
+export type UpdateExistingModelType = {
+  model: string;
+  base_url: string;
+  api_type: string;
+  api_version?: string;
+  uuid: string;
+};
