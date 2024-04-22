@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useForm } from '../hooks/useForm';
-import { JsonSchema } from '../interfaces/models';
+import { JsonSchema } from '../interfaces/ModelInterfaces';
 import { TextInput } from './form/TextInput';
 import { SelectInput } from './form/SelectInput';
 import { validateForm } from '../services/commonService';
 import { parseValidationErrors } from '../app/utils/formHelpers';
 import Loader from '../admin/common/Loader';
 
-import { UpdateExistingModelType } from '../interfaces/models';
+import { Model } from '../interfaces/ModelInterfaces';
 
 interface DynamicFormBuilderProps {
   jsonSchema: JsonSchema;
   validationURL: string;
-  updateExistingModel: UpdateExistingModelType | null;
+  updateExistingModel: Model | null;
   onSuccessCallback: (data: any) => void;
   onCancelCallback: (data: any) => void;
 }
@@ -43,39 +43,35 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
   return (
     <>
       <form onSubmit={handleSubmit} className='grid grid-cols-1 md:grid-cols-2 gap-9 p-6.5'>
-        {Object.entries(jsonSchema.properties).map(([key, property]) =>
-          property?.enum?.length === 1 ? null : (
+        {Object.entries(jsonSchema.properties).map(([key, property]) => {
+          const inputValue =
+            updateExistingModel && updateExistingModel.hasOwnProperty(key)
+              ? // @ts-ignore
+                updateExistingModel[key] || ''
+              : formData[key] || '';
+
+          return property?.enum?.length === 1 ? null : (
             <div key={key} className='w-full'>
               <label htmlFor={key}>{property.title}</label>
               {property.enum ? (
                 <SelectInput
                   id={key}
-                  value={
-                    updateExistingModel && updateExistingModel.hasOwnProperty(key)
-                      ? // @ts-ignore
-                        updateExistingModel[key]
-                      : formData[key]
-                  }
+                  value={inputValue}
                   options={property.enum}
                   onChange={(value) => handleChange(key, value)}
                 />
               ) : (
                 <TextInput
                   id={key}
-                  value={
-                    updateExistingModel && updateExistingModel.hasOwnProperty(key)
-                      ? // @ts-ignore
-                        updateExistingModel[key]
-                      : formData[key]
-                  }
+                  value={inputValue}
                   placeholder={property.description || ''}
                   onChange={(value) => handleChange(key, value)}
                 />
               )}
               {formErrors[key] && <div style={{ color: 'red' }}>{formErrors[key]}</div>}
             </div>
-          )
-        )}
+          );
+        })}
         <div className='col-span-full'>
           <button
             type='submit'

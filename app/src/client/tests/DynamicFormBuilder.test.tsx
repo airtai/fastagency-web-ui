@@ -4,9 +4,9 @@ import { act } from 'react-dom/test-utils';
 import { renderInContext } from 'wasp/client/test';
 
 import DynamicFormBuilder from '../components/DynamicFormBuilder';
-import { JsonSchema } from '../interfaces/models';
+import { JsonSchema } from '../interfaces/ModelInterfaces';
 import { validateForm } from '../services/commonService';
-import { UpdateExistingModelType } from '../interfaces/models';
+import { Model } from '../interfaces/ModelInterfaces';
 
 const setFormErrors = vi.fn();
 const handleChange = vi.fn();
@@ -65,7 +65,7 @@ const jsonSchema: JsonSchema = {
   type: '',
 };
 
-const updateExistingModel: UpdateExistingModelType = {
+const updateExistingModel: Model = {
   model: 'gpt-3.5-turbo',
   base_url: 'https://api.openai.com/v1',
   api_type: 'openai',

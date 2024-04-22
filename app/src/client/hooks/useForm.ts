@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { JsonSchema } from '../interfaces/models';
+import { JsonSchema } from '../interfaces/ModelInterfaces';
 
 export const useForm = (jsonSchema: JsonSchema) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});

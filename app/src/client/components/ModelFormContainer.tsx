@@ -1,14 +1,14 @@
 // components/ModelFormContainer.tsx
 import React from 'react';
-import { ModelSchema } from '../interfaces/models';
+import { ModelSchemas } from '../interfaces/ModelInterfaces';
 
 interface ModelFormContainerProps {
   selectedModel: string | null;
-  modelsSchema: ModelSchema;
+  modelSchemas: ModelSchemas;
   onModelChange: (selectedModel: string) => void;
 }
 
-const ModelFormContainer: React.FC<ModelFormContainerProps> = ({ selectedModel, modelsSchema, onModelChange }) => {
+const ModelFormContainer: React.FC<ModelFormContainerProps> = ({ selectedModel, modelSchemas, onModelChange }) => {
   return (
     <div className='flex flex-col gap-9'>
       <div className='flex flex-col gap-5.5 px-6.5'>
@@ -19,10 +19,10 @@ const ModelFormContainer: React.FC<ModelFormContainerProps> = ({ selectedModel, 
             className='w-full rounded border bg-transparent py-3 px-12 outline-none focus:border-primary'
             onChange={(e) => onModelChange(e.target.value)}
             defaultValue={
-              selectedModel ? (selectedModel === 'openai' ? 'OpenAI' : 'AzureOAI') : modelsSchema.schemas[0].name
+              selectedModel ? (selectedModel === 'openai' ? 'OpenAI' : 'AzureOAI') : modelSchemas.schemas[0].name
             }
           >
-            {modelsSchema.schemas.map((schema) => (
+            {modelSchemas.schemas.map((schema) => (
               <option key={schema.name} value={schema.name}>
                 {schema.name}
               </option>
