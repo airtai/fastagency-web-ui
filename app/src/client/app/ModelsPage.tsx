@@ -83,6 +83,7 @@ const ModelsPage = () => {
               <div className={`${showAddModel ? 'hidden' : ''} flex justify-end w-full px-6.5 py-3`}>
                 <Button
                   onClick={async () => {
+                    updateExistingModel && setUpdateExistingModel(null);
                     setIsLoading(true);
                     await fetchData();
                     setShowAddModel(true);
