@@ -15,6 +15,7 @@ interface DynamicFormBuilderProps {
   updateExistingModel: Model | null;
   onSuccessCallback: (data: any) => void;
   onCancelCallback: (data: any) => void;
+  onDeleteCallback: (data: any) => void;
 }
 
 const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
@@ -23,6 +24,7 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
   updateExistingModel,
   onSuccessCallback,
   onCancelCallback,
+  onDeleteCallback,
 }) => {
   const { formData, handleChange, formErrors, setFormErrors } = useForm({
     jsonSchema,
@@ -91,6 +93,17 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
           >
             Cancel
           </button>
+
+          {updateExistingModel && (
+            <button
+              className='float-right ml-3 rounded-md px-3.5 py-2.5 text-sm border bg-airt-error text-airt-font-base hover:bg-opacity-80 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+              disabled={isLoading}
+              data-testid='form-cancel-button'
+              onClick={onDeleteCallback}
+            >
+              Delete model
+            </button>
+          )}
         </div>
       </form>
       {isLoading && (

@@ -81,6 +81,7 @@ describe('DynamicFormBuilder', () => {
         updateExistingModel={updateExistingModel}
         onSuccessCallback={vi.fn()}
         onCancelCallback={vi.fn()}
+        onDeleteCallback={vi.fn()}
       />
     );
     expect(screen.getByLabelText('Model')).toBeInTheDocument();
@@ -97,6 +98,7 @@ describe('DynamicFormBuilder', () => {
         updateExistingModel={updateExistingModel}
         onSuccessCallback={onSuccessCallback}
         onCancelCallback={vi.fn()}
+        onDeleteCallback={vi.fn()}
       />
     );
 
@@ -148,6 +150,7 @@ describe('DynamicFormBuilder', () => {
         updateExistingModel={updateExistingModel}
         onSuccessCallback={onSuccessCallback}
         onCancelCallback={vi.fn()}
+        onDeleteCallback={vi.fn()}
       />
     );
 
@@ -168,6 +171,7 @@ describe('DynamicFormBuilder', () => {
         updateExistingModel={updateExistingModel}
         onSuccessCallback={vi.fn()}
         onCancelCallback={vi.fn()}
+        onDeleteCallback={vi.fn()}
       />
     );
 

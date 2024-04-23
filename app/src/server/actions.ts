@@ -9,6 +9,7 @@ import {
   type ValidateForm,
   type UpdateUserModels,
   type AddUserModels,
+  type DeleteUserModels,
 } from 'wasp/server/operations';
 import Stripe from 'stripe';
 import type { StripePaymentResult } from '../shared/types';
@@ -176,6 +177,33 @@ export const updateUserModels: UpdateUserModels<UpdateUserModelsPayload, void> =
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: context.user.id, ...args.data, uuid: args.uuid }),
+    });
+    const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
+
+    if (!response.ok) {
+      const errorMsg = json.detail || `HTTP error with status code ${response.status}`;
+      console.error('Server Error:', errorMsg);
+      throw new Error(errorMsg);
+    }
+  } catch (error: any) {
+    throw new HttpError(500, error.message);
+  }
+};
+
+type DeleteUserModelsPayload = {
+  uuid: string;
+};
+
+export const deleteUserModels: DeleteUserModels<DeleteUserModelsPayload, void> = async (args, context) => {
+  if (!context.user) {
+    throw new HttpError(401);
+  }
+
+  try {
+    const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/delete`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: context.user.id, uuid: args.uuid }),
     });
     const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
 

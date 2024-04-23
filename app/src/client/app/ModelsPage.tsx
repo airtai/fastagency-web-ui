@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getModels, useQuery, updateUserModels, addUserModels } from 'wasp/client/operations';
+import { getModels, useQuery, updateUserModels, addUserModels, deleteUserModels } from 'wasp/client/operations';
 
 import { useModels, ModelsActionType } from '../hooks/useModels';
 import CustomLayout from './layout/CustomLayout';
@@ -36,6 +36,14 @@ const ModelsPage = () => {
 
   const onCancelCallback = () => {
     dispatch({ type: ModelsActionType.TOGGLE_ADD_MODEL, payload: false });
+  };
+
+  const onDeleteCallback = async () => {
+    dispatch({ type: ModelsActionType.TOGGLE_LOADING, payload: true });
+    state.updateExistingModel && (await deleteUserModels({ uuid: state.updateExistingModel.uuid }));
+    await refetchModels();
+    dispatch({ type: ModelsActionType.TOGGLE_ADD_MODEL, payload: false });
+    dispatch({ type: ModelsActionType.TOGGLE_LOADING, payload: false });
   };
 
   const updateSelectedModel = (index: number) => {
@@ -93,6 +101,7 @@ const ModelsPage = () => {
                             onModelChange={handleModelChange}
                             onSuccessCallback={onSuccessCallback}
                             onCancelCallback={onCancelCallback}
+                            onDeleteCallback={onDeleteCallback}
                           />
                         )}
                       </>

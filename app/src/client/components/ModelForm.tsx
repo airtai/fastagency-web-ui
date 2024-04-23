@@ -13,6 +13,7 @@ interface ModelFormProps {
   onModelChange: (model: string) => void;
   onSuccessCallback: (data: any) => void;
   onCancelCallback: () => void;
+  onDeleteCallback: (data: any) => void;
 }
 
 const ModelForm: React.FC<ModelFormProps> = ({
@@ -23,6 +24,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
   onModelChange,
   onSuccessCallback,
   onCancelCallback,
+  onDeleteCallback,
 }) => {
   return (
     <div>
@@ -39,6 +41,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
               updateExistingModel={updateExistingModel ?? null}
               onSuccessCallback={onSuccessCallback}
               onCancelCallback={onCancelCallback}
+              onDeleteCallback={onDeleteCallback}
             />
           )}
         </>

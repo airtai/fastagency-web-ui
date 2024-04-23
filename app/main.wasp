@@ -280,6 +280,11 @@ action addUserModels {
   entities: []
 }
 
+action deleteUserModels {
+  fn: import { deleteUserModels } from "@src/server/actions.js",
+  entities: []
+}
+
 action validateForm {
   fn: import { validateForm } from "@src/server/actions.js",
   entities: []
