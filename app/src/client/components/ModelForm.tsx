@@ -28,7 +28,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
     <div>
       {modelSchemas && (
         <>
-          {updateExistingModel && <h2 className='text-lg font-semibold text-airt-primary'>Update model</h2>}
+          {updateExistingModel && <h2 className='sm:mt-6 text-lg font-semibold text-airt-primary'>Update model</h2>}
           {!updateExistingModel && (
             <ModelFormContainer selectedModel={null} modelSchemas={modelSchemas} onModelChange={onModelChange} />
           )}

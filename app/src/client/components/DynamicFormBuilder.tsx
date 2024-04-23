@@ -47,6 +47,9 @@ const DynamicFormBuilder: React.FC<DynamicFormBuilderProps> = ({
     <>
       <form onSubmit={handleSubmit} className='grid grid-cols-1 md:grid-cols-2 gap-9 p-6.5'>
         {Object.entries(jsonSchema.properties).map(([key, property]) => {
+          if (key === 'uuid') {
+            return null;
+          }
           const inputValue = formData[key] || '';
 
           return property?.enum?.length === 1 ? null : (

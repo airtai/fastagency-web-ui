@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { type User } from 'wasp/entities';
 import { HttpError } from 'wasp/server';
 import {
@@ -133,12 +134,11 @@ export const addUserModels: AddUserModels<AddUserModelsPayload, void> = async (a
   if (!context.user) {
     throw new HttpError(401);
   }
-
   try {
     const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/add`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: context.user.id, ...args.data }),
+      body: JSON.stringify({ user_id: context.user.id, ...args.data }),
     });
     const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
 
@@ -175,7 +175,7 @@ export const updateUserModels: UpdateUserModels<UpdateUserModelsPayload, void> =
     const response = await fetch(`${FASTAGENCY_SERVER_URL}/models/update`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: context.user.id, ...args.data, uuid: args.uuid }),
+      body: JSON.stringify({ user_id: context.user.id, ...args.data, uuid: args.uuid }),
     });
     const json: any = (await response.json()) as { detail?: string }; // Parse JSON once
 
@@ -196,8 +196,8 @@ export const validateForm: ValidateForm<{ data: any; validationURL: string }, an
   if (!context.user) {
     throw new HttpError(401);
   }
-
   try {
+    if (!data.uuid) data.uuid = uuidv4();
     const response = await fetch(`${FASTAGENCY_SERVER_URL}/${validationURL}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -211,7 +211,6 @@ export const validateForm: ValidateForm<{ data: any; validationURL: string }, an
         JSON.stringify(json.detail) || `HTTP error with status code ${response.status}`
       );
     }
-
     return data;
   } catch (error: any) {
     throw new HttpError(error.statusCode || 500, error.message || 'Server or network error occurred');

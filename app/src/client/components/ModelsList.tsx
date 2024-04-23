@@ -3,7 +3,7 @@ import ModelItem from './ModelItem';
 import { Model } from '../interfaces/ModelInterfaces';
 
 interface ModelListProps {
-  models: Model[];
+  models: Model[] | undefined;
   onSelectModel: (index: number) => void;
 }
 
